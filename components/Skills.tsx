@@ -20,13 +20,6 @@ const skills = [
   
 ]
 
-const categoryColors: { [key: string]: string } = {
-  Frontend: 'bg-blue-500',
-  Backend: 'bg-green-500',
-  'Machine Learning': 'bg-purple-500',
-  Mobile: 'bg-yellow-500',
-  DevOps: 'bg-red-500',
-}
 
 const Skills = () => {
   const containerRef = useRef<HTMLDivElement | null>(null)

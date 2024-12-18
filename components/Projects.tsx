@@ -2,7 +2,8 @@
 
 import { useState, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ExternalLink, Github, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Github, ChevronLeft, ChevronRight } from 'lucide-react'
+import Image from 'next/image'
 
 const projects = [
   {
@@ -25,7 +26,7 @@ const projects = [
     title: 'Pharmacy MAnagement System',
     description: 'A simple and efficient system for managing pharmacy operations, including inventory, prescriptions, sales, and customer transactions. It helps pharmacies track stock levels, process sales, generate reports, and manage user roles.',
     technologies: ['Bootstrap', 'Django', 'Postgress'],
-    image: 'img/Pharmcy-Management-system.png',
+    image: '/img/Pharmcy-Management-system.png',
     github: 'https://github.com/Yashparmar1125/Pharmacy_Management_System',
     live: 'https://example.com',
   },
@@ -86,6 +87,7 @@ const Projects = () => {
           >
             {projects.map((project, index) => {
               // Use useState to manage technologies visibility for each project
+              // eslint-disable-next-line react-hooks/rules-of-hooks
               const [showTechnologies, setShowTechnologies] = useState(false);
 
               return (
@@ -97,7 +99,7 @@ const Projects = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <div className="bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
-                    <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
+                    <Image src={project.image} alt={project.title} width={500} height={300} className="w-full h-48 object-cover" />
                     <div className="p-6">
                       <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                       <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>

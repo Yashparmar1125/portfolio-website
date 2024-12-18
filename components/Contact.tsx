@@ -64,6 +64,7 @@ const Contact = () => {
       } else {
         setError('Something went wrong. Please try again later.')
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setError('Network error. Please try again later.')
     } finally {

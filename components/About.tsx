@@ -44,7 +44,7 @@ const About = () => {
   My journey in tech has been driven by my fascination with the potential of AI and ML to revolutionize industries. I am constantly exploring new algorithms, tools, and frameworks to stay ahead of the curve and leverage these technologies to build smarter, more intuitive applications.
 </p>
 <p className="text-lg mb-6">
-  Outside of coding, I'm actively involved in the tech community through open-source contributions, writing technical articles, and mentoring aspiring developers. Let's collaborate to create cutting-edge solutions and push the boundaries of technology together!
+  Outside of coding, I&apos;m actively involved in the tech community through open-source contributions, writing technical articles, and mentoring aspiring developers. Let&apos;s collaborate to create cutting-edge solutions and push the boundaries of technology together!
 </p>
 
             {/* Get My Resume Button */}

@@ -20,7 +20,7 @@ const Hero = () => {
           transition={{ duration: 0.5 }}
           className="text-5xl md:text-7xl font-bold mb-4"
         >
-          Hi, I'm <span className="text-blue-500">{text}</span>
+          Hi, I&apos;m <span className="text-blue-500">{text}</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
