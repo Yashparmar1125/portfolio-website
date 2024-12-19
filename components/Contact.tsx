@@ -50,15 +50,22 @@ const Contact = () => {
 
     try {
       // Send form data to EmailJS
-      const response = await emailjs.send(
+      const responseOwner = await emailjs.send(
         'service_43jdvrm',  // Your EmailJS service ID
         'template_jbqfcrf', // Your EmailJS template ID
         formData,           // The form data (name, email, message)
         'hkxZ7Znns_mPuqA_-'      // Your EmailJS API Key (user ID)
       )
 
+      const responseConsumer = await emailjs.send(
+        'service_43jdvrm',  // Your EmailJS service ID
+        'template_uc6udbe', // Your EmailJS template ID
+        formData,           // The form data (name, email, message)
+        'hkxZ7Znns_mPuqA_-'      // Your EmailJS API Key (user ID)
+      )
+
       // Check if the response is successful
-      if (response.status === 200) {
+      if (responseOwner.status === 200 && responseConsumer.status == 200) {
         setSuccess(true)
         setFormData({ name: '', email: '', message: '' })  // Clear the form after success
       } else {
