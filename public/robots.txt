@@ -1,0 +1,15 @@
+# Allow all crawlers to access everything except the /admin/ and /login/ paths
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+
+# Allow Googlebot to access everything
+User-agent: Googlebot
+Disallow:
+
+# Block crawlers from the /private/ directory
+User-agent: *
+Disallow: /private/
+
+# Specify the location of your sitemap
+Sitemap: https://yash-parmar.vercel.app/robots.txt
