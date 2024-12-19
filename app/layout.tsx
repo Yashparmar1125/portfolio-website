@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Yash Parmar - Software Engineer | Portfolio & Projects",
+  title: "Yash Parmar - Software Engineer | Portfolio ",
   description:
     "Explore the portfolio of Yash Parmar, a passionate software engineer specializing in web development, machine learning, and innovative tech solutions.",
   keywords: "Yash Parmar, software engineer, portfolio, web development, machine learning, tech solutions, Yash, AI, software engineering, full-stack development",
