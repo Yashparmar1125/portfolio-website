@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description:
     "Explore the portfolio of Yash Parmar, a passionate software engineer specializing in web development, machine learning, and innovative tech solutions. Discover projects, skills, and expertise.",
   keywords: "Yash Parmar, software engineer, portfolio, web development, machine learning, tech solutions, projects, programming, software engineering, full-stack development",
-  author: "Yash Parmar",
+  
   openGraph: {
     title: "Yash Parmar - Software Engineer | Portfolio & Projects",
     description:
