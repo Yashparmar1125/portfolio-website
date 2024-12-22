@@ -1,86 +1,91 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Send } from 'lucide-react'
-import emailjs from 'emailjs-com'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send } from 'lucide-react';
+import emailjs from "emailjs-com";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
+    name: "",
+    email: "",
+    message: "",
+  });
 
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Handle form input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   // Simple email validation
   const validateEmail = (email: string) => {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-    return emailPattern.test(email)
-  }
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  };
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // Reset previous error or success messages
-    setError('')
-    setSuccess(false)
+    setError("");
+    setSuccess(false);
 
     // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
-      setError('All fields are required.')
-      return
+      setError("All fields are required.");
+      return;
     }
 
     if (!validateEmail(formData.email)) {
-      setError('Please enter a valid email address.')
-      return
+      setError("Please enter a valid email address.");
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
 
     try {
       // Send form data to EmailJS
       const responseOwner = await emailjs.send(
-        'service_43jdvrm',  // Your EmailJS service ID
-        'template_jbqfcrf', // Your EmailJS template ID
-        formData,           // The form data (name, email, message)
-        'hkxZ7Znns_mPuqA_-'      // Your EmailJS API Key (user ID)
-      )
+        "service_43jdvrm", // Your EmailJS service ID
+        "template_jbqfcrf", // Your EmailJS template ID
+        formData, // The form data (name, email, message)
+        "hkxZ7Znns_mPuqA_-", // Your EmailJS API Key (user ID)
+      );
 
       const responseConsumer = await emailjs.send(
-        'service_43jdvrm',  // Your EmailJS service ID
-        'template_uc6udbe', // Your EmailJS template ID
-        formData,           // The form data (name, email, message)
-        'hkxZ7Znns_mPuqA_-'      // Your EmailJS API Key (user ID)
-      )
+        "service_43jdvrm", // Your EmailJS service ID
+        "template_uc6udbe", // Your EmailJS template ID
+        formData, // The form data (name, email, message)
+        "hkxZ7Znns_mPuqA_-", // Your EmailJS API Key (user ID)
+      );
 
       // Check if the response is successful
       if (responseOwner.status === 200 && responseConsumer.status == 200) {
-        setSuccess(true)
-        setFormData({ name: '', email: '', message: '' })  // Clear the form after success
+        setSuccess(true);
+        setFormData({ name: "", email: "", message: "" }); // Clear the form after success
       } else {
-        setError('Something went wrong. Please try again later.')
+        setError("Something went wrong. Please try again later.");
       }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      setError('Network error. Please try again later.')
+      setError("Network error. Please try again later.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
-    <section id="contact" className="py-20 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <section
+      id="contact"
+      className="py-20 bg-gray-100 dark:bg-gray-900 transition-colors duration-300"
+    >
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -93,7 +98,11 @@ const Contact = () => {
 
         {/* Display success or error message */}
         {error && <div className="mb-4 text-red-600 text-center">{error}</div>}
-        {success && <div className="mb-4 text-green-600 text-center">Message sent successfully!</div>}
+        {success && (
+          <div className="mb-4 text-green-600 text-center">
+            Message sent successfully!
+          </div>
+        )}
 
         {/* Contact form */}
         <motion.form
@@ -156,12 +165,13 @@ const Contact = () => {
             disabled={loading}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition-colors flex items-center justify-center disabled:bg-gray-400"
           >
-            {loading ? 'Sending...' : 'Send Message'} <Send className="ml-2" />
+            {loading ? "Sending..." : "Send Message"} <Send className="ml-2" />
           </button>
         </motion.form>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
+

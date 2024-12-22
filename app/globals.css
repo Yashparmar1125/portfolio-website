@@ -4,6 +4,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -81,3 +82,43 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.rounded-blob {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: morphShape 8s ease-in-out infinite;
+  z-index: 10;
+}
+@keyframes morphShape {
+  0%,
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  33% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  66% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+}
+
+.dark {
+  --primary: #38bdf8;
+  --secondary: #2dd4bf;
+  --background: #0f172a;
+  --text: #e2e8f0;
+}
+
+button {
+  position: relative; /* Ensure the button is positioned properly */
+  z-index: 10; /* Ensure it's clickable above other layers */
+}
+
+/* Additional changes for the button */
+button:hover {
+  background-color: #38bdf8; /* Example hover effect */
+}
+
+button:active {
+  transform: scale(0.95); /* Active scale effect */
+}
+

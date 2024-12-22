@@ -1,11 +1,38 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { motion } from "framer-motion";
+import Image from "next/image";
+
+// Fluid Image style and hover effect
+const fluidImageStyle: React.CSSProperties = {
+  animation: "morphShape 8s ease-in-out infinite", // Adding fluid animation
+  borderRadius: "50%", // Initial shape (circle)
+  objectFit: "cover", // Ensures the image fits well within the shape
+  width: "100%", // Full width to fit container
+  height: "100%", // Full height to fit container
+};
+
+// Keyframes for fluid morphing effect
+const fluidImageKeyframes = `
+@keyframes morphShape {
+  0%, 100% {
+    border-radius: 50%;
+  }
+  33% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  66% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+}
+`;
 
 const About = () => {
   return (
-    <section id="about" className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
+    <section
+      id="about"
+      className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300"
+    >
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -16,21 +43,30 @@ const About = () => {
           About Me
         </motion.h2>
         <div className="flex flex-col md:flex-row items-center justify-between">
+          {/* Image container */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:w-1/2 mb-8 md:mb-0"
+            className="md:w-1/2 mb-8 md:mb-0 flex justify-center"
           >
-            {/* Increased width and height */}
-            <Image
-              src="/img/yash.jpg"
-              alt="Yash Parmar"
-              width={300}  // Increased width
-              height={300} // Increased height
-              className="rounded-full w-64 h-64 object-cover mx-auto shadow-lg"
-            />
+            <style>{fluidImageKeyframes}</style> {/* Insert the CSS keyframes directly */}
+            <motion.div
+              className="relative"
+              style={{ width: "300px", height: "300px" }} // Set the size of the container
+            >
+              <Image
+                src="/img/yash.jpg"
+                alt="Yash Parmar"
+                width={300}
+                height={300}
+                className="rounded-full object-cover mx-auto shadow-lg hover:scale-110 transition-transform duration-300 ease-in-out"
+                style={fluidImageStyle} // Apply the fluid animation and shape
+              />
+            </motion.div>
           </motion.div>
+
+          {/* Text content */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -38,14 +74,26 @@ const About = () => {
             className="md:w-1/2"
           >
             <p className="text-lg mb-4">
-  I am a passionate Software Developer with a deep interest in Artificial Intelligence (AI) and Machine Learning (ML). I have a strong foundation in building scalable web and mobile applications, always focused on creating efficient and innovative solutions that add value to users and businesses alike.
-</p>
-<p className="text-lg mb-4">
-  My journey in tech has been driven by my fascination with the potential of AI and ML to revolutionize industries. I am constantly exploring new algorithms, tools, and frameworks to stay ahead of the curve and leverage these technologies to build smarter, more intuitive applications.
-</p>
-<p className="text-lg mb-6">
-  Outside of coding, I&apos;m actively involved in the tech community through open-source contributions, writing technical articles, and mentoring aspiring developers. Let&apos;s collaborate to create cutting-edge solutions and push the boundaries of technology together!
-</p>
+              I am a passionate Software Developer with a deep interest in
+              Artificial Intelligence (AI) and Machine Learning (ML). I have a
+              strong foundation in building scalable web and mobile
+              applications, always focused on creating efficient and innovative
+              solutions that add value to users and businesses alike.
+            </p>
+            <p className="text-lg mb-4">
+              My journey in tech has been driven by my fascination with the
+              potential of AI and ML to revolutionize industries. I am
+              constantly exploring new algorithms, tools, and frameworks to stay
+              ahead of the curve and leverage these technologies to build
+              smarter, more intuitive applications.
+            </p>
+            <p className="text-lg mb-6">
+              Outside of coding, I&apos;m actively involved in the tech
+              community through open-source contributions, writing technical
+              articles, and mentoring aspiring developers. Let&apos;s
+              collaborate to create cutting-edge solutions and push the
+              boundaries of technology together!
+            </p>
 
             {/* Get My Resume Button */}
             <motion.a
@@ -74,7 +122,7 @@ const About = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default About
+export default About;
