@@ -1,6 +1,6 @@
-import Header from './Header';
-import Footer from './Footer';
-import CustomCursor from './CustomCursor';
+import Header from "./Header";
+import Footer from "./Footer";
+import CustomCursor from "./CustomCursor";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,4 +18,3 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 };
 
 export default Layout;
-

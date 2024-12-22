@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send } from 'lucide-react';
+import { Send } from "lucide-react";
 import emailjs from "emailjs-com";
 
 const Contact = () => {
@@ -174,4 +174,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

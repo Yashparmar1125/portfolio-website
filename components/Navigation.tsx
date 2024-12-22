@@ -8,10 +8,7 @@ interface NavItemProps {
 }
 
 const NavItem: React.FC<NavItemProps> = ({ name, path, onClick }) => (
-  <motion.div
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.95 }}
-  >
+  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
     <Link
       href={path}
       onClick={onClick}
@@ -26,23 +23,28 @@ interface NavigationProps {
   onItemClick?: () => void;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ onItemClick }: NavigationProps) => {
+const Navigation: React.FC<NavigationProps> = ({
+  onItemClick,
+}: NavigationProps) => {
   const navItems = [
     { name: "Home", path: "/#home" },
     { name: "About", path: "/#about" },
     { name: "Skills", path: "/#skills" },
     { name: "Certifications", path: "/#certifications" },
     { name: "Projects", path: "/#projects" },
-    
+
     { name: "Contact", path: "/#contact" },
   ];
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string): void => {
+  const handleClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    path: string,
+  ): void => {
     e.preventDefault();
-    const targetId = path.split('#')[1];
+    const targetId = path.split("#")[1];
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
+      targetElement.scrollIntoView({ behavior: "smooth" });
     }
     if (onItemClick) {
       onItemClick();

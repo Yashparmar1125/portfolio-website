@@ -50,7 +50,8 @@ const About = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="md:w-1/2 mb-8 md:mb-0 flex justify-center"
           >
-            <style>{fluidImageKeyframes}</style> {/* Insert the CSS keyframes directly */}
+            <style>{fluidImageKeyframes}</style>{" "}
+            {/* Insert the CSS keyframes directly */}
             <motion.div
               className="relative"
               style={{ width: "300px", height: "300px" }} // Set the size of the container

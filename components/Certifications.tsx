@@ -5,32 +5,32 @@ import Image from "next/image";
 
 const certifications = [
   {
-    name: "AWS Certified Solutions Architect",
-    organization: "Amazon Web Services",
-    logo: "/img/yash.jpg",
-    year: 2023,
-    url: "https://www.example.com/aws-certified-solution-architect", // Add URL here
+    name: "JavaScript (Intermidiate)",
+    organization: "HackerRank",
+    logo: "/img/HackerRank_Icon-1000px.png",
+    year: 2024,
+    url: "https://www.hackerrank.com/certificates/86b3bf02d3ed", // Add URL here
   },
   {
-    name: "Google Cloud Professional Data Engineer",
-    organization: "Google Cloud",
-    logo: "/img/yash.jpg",
-    year: 2022,
-    url: "https://www.example.com/google-cloud-professional-data-engineer", // Add URL here
+    name: "React.js",
+    organization: "LetsUpgrade",
+    logo: "/img/letsupgrade.png",
+    year: 2024,
+    url: "https://verify.letsupgrade.in/certificate/LUERJSDEC1241014", // Add URL here
   },
   {
-    name: "TensorFlow Developer Certificate",
-    organization: "Google",
-    logo: "/img/yash.jpg",
-    year: 2022,
-    url: "https://www.example.com/tensorflow-developer-certificate", // Add URL here
+    name: "Python (Advance)",
+    organization: "HackerRank",
+    logo: "/img/HackerRank_Icon-1000px.png",
+    year: 2024,
+    url: "https://www.hackerrank.com/certificates/86b3bf02d3ed", // Add URL here
   },
   {
-    name: "Microsoft Certified: Azure AI Engineer Associate",
-    organization: "Microsoft",
-    logo: "/img/yash.jpg",
-    year: 2021,
-    url: "https://www.example.com/microsoft-azure-ai-engineer-associate", // Add URL here
+    name: "Node.js",
+    organization: "LetsUpgrade",
+    logo: "/img/letsupgrade.png",
+    year: 2024,
+    url: "https://verify.letsupgrade.in/certificate/LUENJSDEC12413", // Add URL here
   },
 ];
 
@@ -63,7 +63,12 @@ const Certifications = () => {
                 transition: { duration: 0.3 }, // Smooth transition
               }}
             >
-              <a href={cert.url} target="_blank" rel="noopener noreferrer" className="w-full h-full">
+              <a
+                href={cert.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full h-full"
+              >
                 <div className="w-24 h-24 mb-4 relative">
                   <Image
                     src={cert.logo}

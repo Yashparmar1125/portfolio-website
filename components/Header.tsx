@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon } from "lucide-react";
 import Link from "next/link";
 import Navigation from "./Navigation";
 
@@ -64,7 +64,7 @@ const Header = () => {
           exit={{ opacity: 0, y: -20 }}
           className="md:hidden bg-sky-50 dark:bg-slate-900 py-2 transition-colors duration-300"
         >
-          <Navigation  onItemClick={() => setIsOpen(false)} />
+          <Navigation onItemClick={() => setIsOpen(false)} />
         </motion.div>
       )}
     </header>
@@ -72,4 +72,3 @@ const Header = () => {
 };
 
 export default Header;
-

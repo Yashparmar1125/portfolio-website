@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import {Cursor } from "react-simple-typewriter";
+import { Cursor } from "react-simple-typewriter";
 import Image from "next/image";
 
 const Hero = () => {
@@ -22,7 +22,7 @@ const Hero = () => {
       "if (error == true) { console.log('It\'s not a bug, it\'s a feature'); }",
       "const bestPractice = 'write code that writes itself';",
     ],
-    []
+    [],
   );
 
   const [typedText, setTypedText] = useState("");
