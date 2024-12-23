@@ -4,8 +4,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import emailjs from "emailjs-com";
-import dotenv from "dotenv";
-dotenv.config();
+
+
 
 
 
