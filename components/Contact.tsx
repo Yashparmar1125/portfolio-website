@@ -4,6 +4,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import emailjs from "emailjs-com";
+import dotenv from "dotenv";
+dotenv.config();
+
+
+
+
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -51,19 +58,23 @@ const Contact = () => {
     setLoading(true);
 
     try {
+      const api_key=process.env.EMAILJS_API_KEY as string;
+      const template_id_1=process.env.EMAILJS_TEMPLATE_ID_1 as string;
+      const template_id_2=process.env.EMAILJS_TEMPLATE_ID_2 as string;
+      const service_id=process.env.EMAILJS_SERVICE_ID as string;
       // Send form data to EmailJS
       const responseOwner = await emailjs.send(
-        "service_43jdvrm", // Your EmailJS service ID
-        "template_jbqfcrf", // Your EmailJS template ID
+        service_id, // Your EmailJS service ID
+        template_id_1, // Your EmailJS template ID1
         formData, // The form data (name, email, message)
-        "hkxZ7Znns_mPuqA_-", // Your EmailJS API Key (user ID)
+        api_key, // Your EmailJS API Key (user ID)
       );
 
       const responseConsumer = await emailjs.send(
-        "service_43jdvrm", // Your EmailJS service ID
-        "template_uc6udbe", // Your EmailJS template ID
+        service_id, // Your EmailJS service ID
+        template_id_2, // Your EmailJS template ID2
         formData, // The form data (name, email, message)
-        "hkxZ7Znns_mPuqA_-", // Your EmailJS API Key (user ID)
+        api_key, // Your EmailJS API Key (user ID)
       );
 
       // Check if the response is successful
