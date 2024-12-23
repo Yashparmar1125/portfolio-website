@@ -28,3 +28,6 @@ const CustomCursor = () => {
 };
 
 export default CustomCursor;
+
+
+//Version 8.3.7
