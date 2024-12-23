@@ -4,7 +4,7 @@ import Link from "next/link";
 interface NavItemProps {
   name: string;
   path: string;
-  onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void; // Updated to accept event
 }
 
 const NavItem: React.FC<NavItemProps> = ({ name, path, onClick }) => (
@@ -23,29 +23,29 @@ interface NavigationProps {
   onItemClick?: () => void;
 }
 
-const Navigation: React.FC<NavigationProps> = ({
-  onItemClick,
-}: NavigationProps) => {
+const Navigation: React.FC<NavigationProps> = ({ onItemClick }) => {
   const navItems = [
-    { name: "Home", path: "/#home" },
+    { name: "Home", path: "/" },
     { name: "About", path: "/#about" },
+    { name: "Services", path: "/services" },
     { name: "Skills", path: "/#skills" },
-    { name: "Certifications", path: "/#certifications" },
     { name: "Projects", path: "/#projects" },
-
+    { name: "Certifications", path: "/#certifications" },
     { name: "Contact", path: "/#contact" },
   ];
 
-  const handleClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    path: string,
-  ): void => {
-    e.preventDefault();
-    const targetId = path.split("#")[1];
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    // If it's an internal link (path starts with '/#')
+    if (path.startsWith('/#')) {
+      e.preventDefault();
+      const targetId = path.split('#')[1];
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+
+    // Trigger onItemClick if provided
     if (onItemClick) {
       onItemClick();
     }
@@ -58,7 +58,7 @@ const Navigation: React.FC<NavigationProps> = ({
           key={item.name}
           name={item.name}
           path={item.path}
-          onClick={(e) => handleClick(e, item.path)}
+          onClick={(e) => handleClick(e, item.path)} // Pass the event
         />
       ))}
     </>
@@ -66,6 +66,3 @@ const Navigation: React.FC<NavigationProps> = ({
 };
 
 export default Navigation;
-
-
-//Version 8.3.7
