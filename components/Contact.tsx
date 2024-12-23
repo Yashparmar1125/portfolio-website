@@ -58,10 +58,10 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      const api_key=process.env.EMAILJS_API_KEY as string;
-      const template_id_1=process.env.EMAILJS_TEMPLATE_ID_1 as string;
-      const template_id_2=process.env.EMAILJS_TEMPLATE_ID_2 as string;
-      const service_id=process.env.EMAILJS_SERVICE_ID as string;
+      const api_key=process.env.NEXT_PUBLIC_EMAILJS_API_KEY as string;
+      const template_id_1=process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_1 as string;
+      const template_id_2=process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_2 as string;
+      const service_id=process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string;
       console.log(api_key,service_id,template_id_1,template_id_2)
       // Send form data to EmailJS
       const responseOwner = await emailjs.send(
