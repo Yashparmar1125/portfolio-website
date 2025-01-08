@@ -98,7 +98,7 @@ const About = () => {
 
             {/* Get My Resume Button */}
             <motion.a
-              href="/path/to/your/resume.pdf" // Replace with the actual path to your resume
+              href="/resume/Resume_YashParmar.pdf" // Replace with the actual path to your resume
               download="Yash_Parmar_Resume.pdf"
               className="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition-colors duration-300"
               whileHover={{ scale: 1.1 }}
@@ -128,4 +128,4 @@ const About = () => {
 
 export default About;
 
-//Version 10.3.7
+//Version 10.4.0
