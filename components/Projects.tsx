@@ -7,6 +7,24 @@ import Image from "next/image";
 
 const projects = [
   {
+    title: "LangSQL - AI-Powered SQL Assistant",
+    description:
+      "An advanced web application that leverages AI to help developers generate, translate, and optimize SQL queries. Features a modern three-tier architecture with React frontend and specialized backend servers for query processing and AI-powered natural language understanding.",
+    technologies: ["React", "Node.js", "Django", "MongoDB", "TensorFlow", "Firebase"],
+    image: "/img/LangSQL.png",
+    github: "https://github.com/Yashparmar1125/LangSQL-Inspiron-4.0",
+    live: "https://example.com",
+  },
+  {
+    title: "EduAI - AI-Powered Learning Platform",
+    description:
+      "A modern, AI-powered learning platform that provides personalized education experiences through interactive courses, assessments, and gamification features. Combines cutting-edge technology with proven educational methodologies for an engaging learning environment.",
+    technologies: ["React", "Node.js", "MongoDB", "Firebase", "Tailwind CSS"],
+    image: "/img/EduAI.png",
+    github: "https://github.com/Yashparmar1125/EduAI",
+    live: "https://eduai-learn.vercel.app",
+  },
+  {
     title: "Student Management System",
     description:
       "The Student Management System is a web application designed to facilitate the management of classroom activities, enhance communication among students, teachers, and school management, and streamline various administrative tasks.",
