@@ -9,6 +9,8 @@ import Image from "next/image";
 const Hero = () => {
   const [text, setText] = useState(""); // Use local state for immediate typing
   const [isTyping, setIsTyping] = useState(false); // To track typing state
+  const [particles, setParticles] = useState<Array<{ x: number, y: number }>>([]);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   const quotes = useMemo(
     () => [
@@ -52,6 +54,29 @@ const Hero = () => {
   useEffect(() => {
     controls.start("visible");
   }, [controls]);
+
+  // Initialize particles after component mounts
+  useEffect(() => {
+    const updateDimensions = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+
+    // Initial update
+    updateDimensions();
+
+    // Initialize particles
+    setParticles(Array(5).fill(null).map(() => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight
+    })));
+
+    // Update dimensions on resize
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -322,19 +347,13 @@ const Hero = () => {
 
       {/* Floating particles */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(5)].map((_, i) => (
+        {particles.map((particle, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-sky-600/50 dark:bg-sky-400/40 rounded-full"
             animate={{
-              x: [
-                Math.random() * window.innerWidth,
-                Math.random() * window.innerWidth
-              ],
-              y: [
-                Math.random() * window.innerHeight,
-                Math.random() * window.innerHeight
-              ],
+              x: [particle.x, Math.random() * dimensions.width],
+              y: [particle.y, Math.random() * dimensions.height],
               opacity: [0.4, 0.7, 0.4],
               scale: [1, 1.5, 1]
             }}
