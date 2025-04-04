@@ -1,67 +1,56 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
-
-interface NavItemProps {
-  name: string;
-  path: string;
-  onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void; // Updated to accept event
-}
-
-const NavItem: React.FC<NavItemProps> = ({ name, path, onClick }) => (
-  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-    <Link
-      href={path}
-      onClick={onClick}
-      className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
-    >
-      {name}
-    </Link>
-  </motion.div>
-);
+import { usePathname } from "next/navigation";
 
 interface NavigationProps {
   onItemClick?: () => void;
+  mobile?: boolean;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ onItemClick }) => {
-  const navItems = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/#about" },
-    { name: "Services", path: "/services" },
-    { name: "Skills", path: "/#skills" },
-    { name: "Projects", path: "/#projects" },
-    { name: "Certifications", path: "/#certifications" },
-    { name: "Contact", path: "/#contact" },
+const Navigation = ({ onItemClick, mobile }: NavigationProps) => {
+  const pathname = usePathname();
+  const links = [
+    { href: "/", label: "Home" },
+    { href: "/#about", label: "About" },
+    { href: "/#projects", label: "Projects" },
+    { href: "/#contact", label: "Contact" },
   ];
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
-    // If it's an internal link (path starts with '/#')
-    if (path.startsWith('/#')) {
-      e.preventDefault();
-      const targetId = path.split('#')[1];
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-
-    // Trigger onItemClick if provided
-    if (onItemClick) {
-      onItemClick();
-    }
-  };
-
   return (
-    <>
-      {navItems.map((item) => (
-        <NavItem
-          key={item.name}
-          name={item.name}
-          path={item.path}
-          onClick={(e) => handleClick(e, item.path)} // Pass the event
-        />
-      ))}
-    </>
+    <div className={`${mobile ? "flex flex-col space-y-6" : "flex items-center gap-8"}`}>
+      {links.map((link) => {
+        const isActive = pathname === link.href;
+        return (
+          <motion.div
+            key={link.href}
+            className="relative"
+            whileHover={{ y: -1 }}
+            whileTap={{ y: 0 }}
+          >
+            <Link
+              href={link.href}
+              onClick={onItemClick}
+              className={`text-base font-medium transition-colors duration-300 ${
+                isActive
+                  ? "text-sky-600 dark:text-sky-400"
+                  : "text-slate-600 hover:text-sky-600 dark:text-slate-300 dark:hover:text-sky-400"
+              }`}
+            >
+              {link.label}
+              {isActive && (
+                <motion.span
+                  layoutId="activeSection"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-sky-600 dark:bg-sky-400"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+            </Link>
+          </motion.div>
+        );
+      })}
+    </div>
   );
 };
 

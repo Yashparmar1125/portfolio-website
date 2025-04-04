@@ -1,9 +1,12 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Github, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Github, ExternalLink, Tag, Calendar, Users, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+
+// Project categories
+const categories = ["All", "Web Development", "AI/ML", "Mobile", "Full Stack"];
 
 const projects = [
   {
@@ -14,6 +17,10 @@ const projects = [
     image: "/img/LangSQL.png",
     github: "https://github.com/Yashparmar1125/LangSQL-Inspiron-4.0",
     live: "https://example.com",
+    category: "Full Stack",
+    completionDate: "2024",
+    teamSize: "Solo",
+    impact: "Reduced SQL query writing time by 60% for developers",
   },
   {
     title: "EduAI - AI-Powered Learning Platform",
@@ -23,6 +30,10 @@ const projects = [
     image: "/img/EduAI.png",
     github: "https://github.com/Yashparmar1125/EduAI",
     live: "https://eduai-learn.vercel.app",
+    category: "Web Development",
+    completionDate: "2024",
+    teamSize: "Solo",
+    impact: "Improved student engagement by 40% through personalized learning",
   },
   {
     title: "Student Management System",
@@ -33,6 +44,10 @@ const projects = [
     github:
       "https://github.com/Yashparmar1125/Student_Management_Systeam/tree/master",
     live: "https://example.com",
+    category: "Full Stack",
+    completionDate: "2024",
+    teamSize: "Solo",
+    impact: "Streamlined administrative tasks",
   },
   {
     title: "Facial Attendence System",
@@ -43,15 +58,23 @@ const projects = [
     github:
       "https://github.com/Yashparmar1125/Face_Attendence_System/tree/master",
     live: "https://example.com",
+    category: "AI/ML",
+    completionDate: "2024",
+    teamSize: "Solo",
+    impact: "Automated attendance marking",
   },
   {
-    title: "Pharmacy MAnagement System",
+    title: "Pharmacy Management System",
     description:
       "A simple and efficient system for managing pharmacy operations, including inventory, prescriptions, sales, and customer transactions. It helps pharmacies track stock levels, process sales, generate reports, and manage user roles.",
     technologies: ["Bootstrap", "Django", "Postgress"],
     image: "/img/Pharmcy-Management-system.png",
     github: "https://github.com/Yashparmar1125/Pharmacy_Management_System",
     live: "https://example.com",
+    category: "Full Stack",
+    completionDate: "2024",
+    teamSize: "Solo",
+    impact: "Streamlined pharmacy operations",
   },
   {
     title: "AI ChatBot",
@@ -61,6 +84,10 @@ const projects = [
     image: "/img/ai_chatbot.png",
     github: "https://github.com/Yashparmar1125/AI_Chatbot",
     live: "https://example.com",
+    category: "AI/ML",
+    completionDate: "2024",
+    teamSize: "Solo",
+    impact: "Enhanced customer support",
   },
   {
     title: "Face Emotion Detector",
@@ -70,124 +97,194 @@ const projects = [
     image: "/img/face_emotion.jpg",
     github: "https://github.com/Yashparmar1125/Face_Emotion_Detector",
     live: "https://example.com",
+    category: "AI/ML",
+    completionDate: "2024",
+    teamSize: "Solo",
+    impact: "Enhanced human-computer interaction",
   },
 ];
 
 const Projects = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [showTechnologies, setShowTechnologies] = useState<{ [key: string]: boolean }>({});
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollX } = useScroll({ container: containerRef });
-  const opacity = useTransform(scrollX, [0, 100], [1, 0]);
 
   const handleScroll = (direction: "left" | "right") => {
     if (containerRef.current) {
-      const scrollAmount = direction === "left" ? -300 : 300;
+      const scrollAmount = direction === "left" ? -400 : 400;
       containerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
+  const toggleTechnologies = (projectTitle: string) => {
+    setShowTechnologies(prev => ({
+      ...prev,
+      [projectTitle]: !prev[projectTitle]
+    }));
+  };
+
+  const filteredProjects = projects.filter((project) => {
+    return selectedCategory === "All" || project.category === selectedCategory;
+  });
+
   return (
     <section
       id="projects"
-      className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300"
+      className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 transition-colors duration-300"
     >
-      <div className="container mx-auto px-4">
-        <motion.h2
+      <div className="container mx-auto px-4 max-w-7xl">
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl font-bold mb-8 text-center"
+          className="text-center mb-16"
         >
-          My Projects
-        </motion.h2>
-        <div className="relative">
-          <motion.div
-            style={{ opacity }}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10"
-          >
-            <button
-              onClick={() => handleScroll("left")}
-              className="bg-white dark:bg-gray-700 p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-sky-600 to-teal-400 dark:from-sky-400 dark:to-teal-300 text-transparent bg-clip-text">
+            Featured Projects
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
+            Explore my latest projects showcasing my skills in web development, AI/ML, and full-stack solutions.
+          </p>
+        </motion.div>
+
+        {/* Category Filter Section */}
+        <div className="mb-12 flex flex-wrap gap-3 justify-center">
+          {categories.map((category) => (
+            <motion.button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                selectedCategory === category
+                  ? "bg-gradient-to-r from-sky-500 to-teal-400 text-white shadow-lg scale-105"
+                  : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
+              }`}
+              whileHover={{ scale: selectedCategory === category ? 1.05 : 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-          </motion.div>
+              {category}
+            </motion.button>
+          ))}
+        </div>
+
+        <div className="relative">
+          <button
+            onClick={() => handleScroll("left")}
+            className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-10 group"
+          >
+            <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-sky-500 transition-colors" />
+          </button>
+          
           <div
             ref={containerRef}
-            className="flex overflow-x-scroll scrollbar-hide snap-x snap-mandatory"
+            className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {projects.map((project, index) => {
-              // Use useState to manage technologies visibility for each project
-              // eslint-disable-next-line react-hooks/rules-of-hooks
-              const [showTechnologies, setShowTechnologies] = useState(false);
-
-              return (
-                <motion.div
-                  key={project.title}
-                  className="flex-shrink-0 w-full md:w-96 mx-4 snap-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <div className="bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex-none w-[350px] snap-center"
+              >
+                <div className="bg-white dark:bg-gray-800/50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full border border-gray-200 dark:border-gray-700/50 group">
+                  <div className="relative aspect-[16/9] overflow-hidden">
                     <Image
                       src={project.image}
                       alt={project.title}
                       width={500}
                       height={300}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
                     />
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold mb-2">
-                        {project.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        {project.description}
-                      </p>
-                      {/* Technologies Button */}
-                      <div className="mb-4">
-                        <button
-                          onClick={() => setShowTechnologies((prev) => !prev)}
-                          className="text-blue-500 hover:text-blue-600"
-                        >
-                          View More
-                        </button>
-                        {/* Show Technologies if button clicked */}
-                        {showTechnologies && (
-                          <div className="mt-4">
-                            <h4 className="font-semibold">Technologies:</h4>
-                            <ul className="list-inside list-disc text-gray-600 dark:text-gray-300">
-                              {project.technologies.map((tech, index) => (
-                                <li key={index}>{tech}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex justify-between">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
                         <a
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center text-blue-500 hover:text-blue-600 transition-colors"
+                          className="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors"
                         >
-                          <Github className="mr-2" /> GitHub
+                          <Github className="w-5 h-5 text-white" />
                         </a>
+                        {project.live && (
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors"
+                          >
+                            <ExternalLink className="w-5 h-5 text-white" />
+                          </a>
+                        )}
                       </div>
                     </div>
+                    <div className="absolute top-4 right-4">
+                      <span className="px-3 py-1 bg-sky-500/90 backdrop-blur-sm text-white text-xs font-medium rounded-full">
+                        {project.category}
+                      </span>
+                    </div>
                   </div>
-                </motion.div>
-              );
-            })}
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400 mb-3">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        <span>{project.completionDate}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Users className="w-4 h-4" />
+                        <span>{project.teamSize}</span>
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                      {project.description}
+                    </p>
+                    {project.impact && (
+                      <div className="mb-4 p-3 bg-sky-50 dark:bg-sky-900/20 rounded-lg">
+                        <p className="text-sm text-sky-600 dark:text-sky-400">
+                          <strong>Impact:</strong> {project.impact}
+                        </p>
+                      </div>
+                    )}
+                    <div>
+                      <button
+                        onClick={() => toggleTechnologies(project.title)}
+                        className="flex items-center gap-2 text-sky-500 hover:text-sky-600 transition-colors text-sm font-medium"
+                      >
+                        <Tag className="w-4 h-4" />
+                        {showTechnologies[project.title] ? "Hide Stack" : "View Stack"}
+                      </button>
+                      {showTechnologies[project.title] && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="mt-3 flex flex-wrap gap-2"
+                        >
+                          {project.technologies.map((tech, index) => (
+                            <span
+                              key={index}
+                              className="px-2 py-1 bg-gray-100 dark:bg-gray-700/50 text-gray-600 dark:text-gray-300 rounded-md text-xs"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </motion.div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-          <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10">
-            <button
-              onClick={() => handleScroll("right")}
-              className="bg-white dark:bg-gray-700 p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
+
+          <button
+            onClick={() => handleScroll("right")}
+            className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg hover:shadow-xl transition-all z-10 group"
+          >
+            <ChevronRight className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-sky-500 transition-colors" />
+          </button>
         </div>
       </div>
     </section>

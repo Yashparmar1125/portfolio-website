@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Cursor } from "react-simple-typewriter";
 import Image from "next/image";
@@ -15,11 +15,11 @@ const Hero = () => {
       "if (bug == true) { debug(); } else { deploy(); }",
       "while (!understandCode()) { debug(); }",
       "There is no place like 127.0.0.1",
-      "It’s not a bug; it’s an undocumented feature.",
+      "It's not a bug; it's an undocumented feature.",
       "if (code == 'clean') { documentation = 'redundant'; } else { refactor(); }",
       "const life = 'debugging'; // It's all about finding solutions",
       "function getBestSolution() { return 'Google it'; }",
-      "if (error == true) { console.log('It\'s not a bug, it\'s a feature'); }",
+      "if (error == true) { console.log('It\'s not a bug, it's a feature'); }",
       "const bestPractice = 'write code that writes itself';",
     ],
     [],
@@ -28,8 +28,6 @@ const Hero = () => {
   const [typedText, setTypedText] = useState("");
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-
-  const [scrollY, setScrollY] = useState(0);
   const controls = useAnimation();
 
   useEffect(() => {
@@ -52,10 +50,7 @@ const Hero = () => {
   }, [isTyping]);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
     controls.start("visible");
-    return () => window.removeEventListener("scroll", handleScroll);
   }, [controls]);
 
   const containerVariants = {
@@ -96,6 +91,32 @@ const Hero = () => {
     },
   };
 
+  const scanlineVariants: Variants = {
+    initial: { y: -100, opacity: 0 },
+    animate: {
+      y: 400,
+      opacity: [0, 0.5, 0],
+      transition: {
+        duration: 2.5,
+        repeat: Infinity,
+        ease: "linear"
+      }
+    }
+  };
+
+  const circuitPatternVariants: Variants = {
+    initial: { opacity: 0, scale: 0.8 },
+    animate: {
+      opacity: [0.2, 0.3, 0.2],
+      scale: [0.8, 1, 0.8],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   // Typing and untyping the quotes
   useEffect(() => {
     if (quoteIndex < quotes.length) {
@@ -108,13 +129,13 @@ const Hero = () => {
       const typeQuote = () => {
         if (i < currentQuote.length) {
           currentText += currentQuote.charAt(i);
-          setTypedText(currentText); // Updating typedText here
+          setTypedText(currentText);
           i++;
-          timeout = setTimeout(typeQuote, 120); // Typing speed: 120ms per character
+          timeout = setTimeout(typeQuote, 120);
         } else {
           setTimeout(() => {
-            setIsDeleting(true); // Start deleting after 1 second
-          }, 1000); // Wait for 1 second before starting to delete
+            setIsDeleting(true);
+          }, 1000);
         }
       };
 
@@ -122,14 +143,14 @@ const Hero = () => {
       const deleteQuote = () => {
         if (i > 0) {
           currentText = currentText.slice(0, -1);
-          setTypedText(currentText); // Updating typedText here
+          setTypedText(currentText);
           i--;
-          timeout = setTimeout(deleteQuote, 80); // Deleting speed: 80ms per character
+          timeout = setTimeout(deleteQuote, 80);
         } else {
           setTimeout(() => {
-            setIsDeleting(false); // Stop deleting after it's done
-            setQuoteIndex((prev) => (prev + 1) % quotes.length); // Loop through quotes
-          }, 1000); // Wait for 1 second before typing next quote
+            setIsDeleting(false);
+            setQuoteIndex((prev) => (prev + 1) % quotes.length);
+          }, 1000);
         }
       };
 
@@ -139,7 +160,6 @@ const Hero = () => {
         deleteQuote();
       }
 
-      // Cleanup timeout on component unmount
       return () => clearTimeout(timeout);
     }
   }, [isDeleting, quoteIndex, quotes]);
@@ -147,24 +167,49 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 md:px-12 lg:px-24"
     >
+      {/* Circuit Pattern Background */}
       <motion.div
-        className="container mx-auto px-4 py-12 flex flex-col md:flex-row items-center justify-between"
+        className="absolute inset-0 pointer-events-none"
+        variants={circuitPatternVariants}
+        initial="initial"
+        animate="animate"
+      >
+        <svg width="100%" height="100%" className="opacity-[0.15] dark:opacity-[0.12]">
+          <pattern id="circuitPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path
+              d="M10 10h20M20 10v20M30 20h-20M10 30h20"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              fill="none"
+              className="stroke-sky-900/40 dark:stroke-current"
+            />
+            <circle cx="10" cy="10" r="2" className="fill-sky-900/40 dark:fill-current" />
+            <circle cx="30" cy="10" r="2" className="fill-sky-900/40 dark:fill-current" />
+            <circle cx="10" cy="30" r="2" className="fill-sky-900/40 dark:fill-current" />
+            <circle cx="30" cy="30" r="2" className="fill-sky-900/40 dark:fill-current" />
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#circuitPattern)" />
+        </svg>
+      </motion.div>
+
+      <motion.div
+        className="container mx-auto py-12 flex flex-col md:flex-row items-center justify-between max-w-7xl"
         variants={containerVariants}
         initial="hidden"
         animate={controls}
       >
         <motion.div
-          className="md:w-1/2 text-center md:text-left mb-8 md:mb-0"
+          className="md:w-1/2 text-center md:text-left mb-8 md:mb-0 md:pr-12 lg:pr-20"
           variants={containerVariants}
         >
           <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-poppins"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-poppins whitespace-nowrap"
             variants={itemVariants}
           >
             Hi, I&apos;m{" "}
-            <span className="text-sky-600 dark:text-sky-400 bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-teal-400 dark:from-sky-400 dark:to-teal-300">
+            <span className="text-sky-600 dark:text-sky-400 bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-teal-400 dark:from-sky-400 dark:to-teal-300 inline-block">
               {text}
             </span>
             <Cursor cursorColor="#0284c7" />
@@ -183,7 +228,7 @@ const Hero = () => {
                 contactSection.scrollIntoView({ behavior: "smooth" });
               }
             }}
-            className="bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-all duration-300 ease-in-out cursor-pointer"
+            className="bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition-all duration-300 ease-in-out cursor-pointer"
             whileHover={{
               scale: 1.05,
               boxShadow: "0 0 15px rgba(2, 132, 199, 0.5)",
@@ -195,34 +240,67 @@ const Hero = () => {
           </motion.button>
         </motion.div>
 
-        {/* Image Container with margin-right */}
+        {/* Image Container with enhanced animations */}
         <motion.div
-          className="md:w-1/2 flex justify-center md:justify-end mr-8"
+          className="md:w-1/2 flex justify-center md:justify-end relative"
           variants={imageVariants}
         >
-          <div className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 flex justify-center items-center">
+          <div className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80">
+            {/* Enhanced blob animation */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-sky-500 to-teal-400 opacity-20 rounded-blob"
+              className="absolute inset-0 bg-gradient-to-br from-sky-600/60 to-teal-500/60 dark:from-sky-400/40 dark:to-teal-300/40"
+              style={{
+                filter: "blur(2px)",
+                mixBlendMode: "soft-light"
+              }}
               animate={{
                 borderRadius: [
-                  "30% 70% 70% 30% / 30% 30% 70% 70%",
                   "60% 40% 30% 70% / 60% 30% 70% 40%",
                   "30% 60% 70% 40% / 50% 60% 30% 60%",
+                  "60% 40% 30% 70% / 60% 30% 70% 40%"
                 ],
+                scale: [1, 1.08, 1],
+                rotate: [0, 8, 0]
               }}
               transition={{
                 duration: 8,
                 ease: "easeInOut",
                 repeat: Infinity,
-                repeatType: "reverse",
+                repeatType: "reverse"
               }}
             />
+
+            {/* Scanning effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-b from-sky-500/0 via-sky-500/25 to-sky-500/0 dark:from-sky-400/0 dark:via-sky-400/20 dark:to-sky-400/0 z-10"
+              variants={scanlineVariants}
+              initial="initial"
+              animate="animate"
+            />
+
+            {/* Glowing ring */}
+            <motion.div
+              className="absolute -inset-4 rounded-full"
+              animate={{
+                boxShadow: [
+                  "0 0 25px rgba(2, 132, 199, 0.3)",
+                  "0 0 35px rgba(2, 132, 199, 0.4)",
+                  "0 0 25px rgba(2, 132, 199, 0.3)"
+                ]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+
             <Image
               src="/img/yash2.jpg"
               alt="yash"
               layout="fill"
               objectFit="cover"
-              className="rounded-blob"
+              className="rounded-blob relative z-0"
             />
           </div>
         </motion.div>
@@ -230,11 +308,11 @@ const Hero = () => {
 
       {/* Quotes Display */}
       <motion.div
-        className="absolute bottom-10 left-0 right-0 text-center"
+        className="absolute bottom-16 left-0 right-0 text-center"
         variants={itemVariants}
       >
         <motion.p
-          className="text-lg md:text-xl lg:text-2xl mb-6 font-code"
+          className="text-lg md:text-xl lg:text-2xl font-code px-4"
           variants={itemVariants}
           style={{ fontFamily: "'Fira Code', monospace", color: "#0284c7" }}
         >
@@ -242,20 +320,34 @@ const Hero = () => {
         </motion.p>
       </motion.div>
 
-      {/* Background Animation */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-sky-500 to-teal-400 opacity-10 dark:opacity-20" />
-        <motion.div
-          className="absolute inset-0"
-          initial={{ backgroundPosition: "0 0" }}
-          animate={{ backgroundPosition: "100% 100%" }}
-          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-          style={{
-            backgroundImage:
-              'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%230284c7" fill-opacity="0.2"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-            transform: `translateY(${scrollY * 0.5}px)`,
-          }}
-        />
+      {/* Floating particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-sky-600/50 dark:bg-sky-400/40 rounded-full"
+            animate={{
+              x: [
+                Math.random() * window.innerWidth,
+                Math.random() * window.innerWidth
+              ],
+              y: [
+                Math.random() * window.innerHeight,
+                Math.random() * window.innerHeight
+              ],
+              opacity: [0.4, 0.7, 0.4],
+              scale: [1, 1.5, 1]
+            }}
+            transition={{
+              duration: 8 + i * 2,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            style={{
+              filter: "blur(1px) drop-shadow(0 0 5px rgba(2, 132, 199, 0.6))"
+            }}
+          />
+        ))}
       </div>
     </section>
   );
