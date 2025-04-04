@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+
 import { AnimatePresence, motion } from "framer-motion";
-import LoadingScreen from "@/components/LoadingScreen";
+
 import Layout from "@/components/Layout";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -14,30 +14,15 @@ import AlienOverlay from "@/components/AlienOverlay";
 
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [contentReady, setContentReady] = useState(false);
+  
 
-  useEffect(() => {
-    // Ensure minimum loading time and proper content preloading
-    const timer = setTimeout(() => {
-      setContentReady(true);
-    }, 5000); // Minimum 5 seconds loading time
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleLoadingComplete = () => {
-    if (contentReady) {
-      setIsLoading(false);
-    }
-  };
+  
+  
 
   return (
     <main className="relative">
       <AnimatePresence mode="wait">
-        {isLoading ? (
-          <LoadingScreen onLoadingComplete={handleLoadingComplete} />
-        ) : (
+        
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -66,7 +51,7 @@ export default function Home() {
               </section>
             </Layout>
           </motion.div>
-        )}
+        
       </AnimatePresence>
     </main>
   );
