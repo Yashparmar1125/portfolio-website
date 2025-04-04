@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, useSpring } from "framer-motion";
 
 const CustomCursor = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
@@ -19,8 +20,8 @@ const CustomCursor = () => {
         e.target.tagName.toLowerCase() === 'a' ||
         e.target.closest('button') ||
         e.target.closest('a') ||
-        e.target.closest('[role="button"]');
-      setIsHovering(isClickable);
+        e.target.closest('[role="button"]') || false;
+      setIsHovering(!!isClickable);
     }
   }, []);
 
