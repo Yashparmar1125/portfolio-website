@@ -43,7 +43,7 @@ const projects = [
     description: "A full-stack web application that predicts stock prices using machine learning techniques. Features include data collection from Yahoo Finance, technical indicator calculations, and XGBoost-based price predictions.",
     image: "/img/stock-sage.png",
     technologies: ["Next.js", "Python", "XGBoost", "Machine Learning", "Flask", "Tailwind CSS"],
-    github: "https://github.com/Yashparmar1125/Stock-Price-Predictor",
+    github: "https://github.com/Yashparmar1125/StockSage-AI",
     live: "http://stocksageai.vercel.app",
     category: "AI/ML",
     color: "from-blue-500/20 to-cyan-500/20 dark:from-blue-500/10 dark:to-cyan-500/10",
