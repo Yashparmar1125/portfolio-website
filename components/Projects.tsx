@@ -32,7 +32,7 @@ const projects = [
     technologies: ["React", "Node.js", "MongoDB", "Firebase", "Tailwind CSS"],
     image: "/img/EduAI.png",
     github: "https://github.com/Yashparmar1125/EduAI",
-    live: "https://eduai-learn.vercel.app",
+    live:"https://eduai-frontend.onrender.com/dashboard",
     category: "Web Development",
     completionDate: "February 2025",
     teamSize: "4",
