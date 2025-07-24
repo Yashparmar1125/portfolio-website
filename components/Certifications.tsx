@@ -11,7 +11,7 @@ const certificates = [
     type: "hackathon",
     title: "Smart India Hackathon 2024",
     date: "2024",
-    position: "Finalist",
+    position: "Shortlisted",
     organizer: "Ministry of Education's Innovation Cell",
     description: "Selected as a finalist in India's largest hackathon, showcasing innovative solutions for real-world challenges",
     icon: Trophy,
