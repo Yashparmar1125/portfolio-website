@@ -23,6 +23,7 @@
     "react-dom": "^18",
     "react-simple-typewriter": "^5.0.1",
     "react-typewriter-effect": "^1.1.0",
+    "@supabase/supabase-js": "^2.39.5",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "terser-webpack-plugin": "^5.3.11",
