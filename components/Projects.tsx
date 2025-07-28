@@ -56,12 +56,12 @@ const projects = [
   "description": "A platform connecting volunteers with NGOs based on skills and availability, with features like task discovery and campaign tracking.",
   "image": "/img/image.png",
   "technologies": ["Node.js", "Express", "MongoDB", "React", "Tailwind CSS", "JWT"],
-  "github": "https://github.com/Yashparmar1125/Impact-Link",
+  "github": "https://github.com/Yashparmar1125/ImpactLink",
   "live": "https://impactlink.vercel.app",
-  "category": "Social Good",
+  "category": "Full Stack",
   "color": "from-green-500/20 to-emerald-500/20 dark:from-green-500/10 dark:to-emerald-500/10",
-  "completionDate": "April 2025",
-  "teamSize": "Team of 3",
+  "completionDate": "December 2024",
+  "teamSize": "3",
   "impact": "Bridges the gap between NGOs and volunteers through skill-based matchmaking."
 }
 ,
