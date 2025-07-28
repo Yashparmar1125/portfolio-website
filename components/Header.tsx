@@ -9,7 +9,7 @@ import Logo from "./Logo";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
