@@ -59,7 +59,7 @@ const projects = [
     image: "/img/student_management_system.jpeg",
     github:
       "https://github.com/Yashparmar1125/Student_Management_Systeam/tree/master",
-    live: "https://example.com",
+    live: "",
     category: "Full Stack",
     completionDate: " May 2024",
     teamSize: "Solo",
@@ -72,8 +72,8 @@ const projects = [
     technologies: ["Flask", "OpenCV", "MySQL"],
     image: "/img/face_attendence.jpg",
     github:
-      "https://github.com/Yashparmar1125/Face_Attendence_System/tree/master",
-    live: "https://example.com",
+      "https://github.com/Yashparmar1125/FaceID.git",
+    live: "https://github.com/Yashparmar1125/FaceID.git",
     category: "AI/ML",
     completionDate: "May 2024",
     teamSize: "Solo",
