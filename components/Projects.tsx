@@ -52,6 +52,20 @@ const projects = [
     impact: "Empowers users to make informed investment decisions by leveraging AI-driven stock price predictions and technical analysis.",
   },
   {
+  "title": "Impact Link",
+  "description": "A platform connecting volunteers with NGOs based on skills and availability, with features like task discovery and campaign tracking.",
+  "image": "/img/image.png",
+  "technologies": ["Node.js", "Express", "MongoDB", "React", "Tailwind CSS", "JWT"],
+  "github": "https://github.com/Yashparmar1125/Impact-Link",
+  "live": "https://impactlink.vercel.app",
+  "category": "Social Good",
+  "color": "from-green-500/20 to-emerald-500/20 dark:from-green-500/10 dark:to-emerald-500/10",
+  "completionDate": "April 2025",
+  "teamSize": "Team of 3",
+  "impact": "Bridges the gap between NGOs and volunteers through skill-based matchmaking."
+}
+,
+  {
     title: "Student Management System",
     description:
       "The Student Management System is a web application designed to facilitate the management of classroom activities, enhance communication among students, teachers, and school management, and streamline various administrative tasks.",
