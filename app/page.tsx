@@ -15,17 +15,44 @@ import { supabase } from "../lib/supabaseClient";
 export default function Home() {
   useEffect(() => {
     const logVisit = async () => {
-      const ipRes = await fetch("https://api.ipify.org?format=json");
-      const { ip } = await ipRes.json();
+      try {
+        const ipRes = await fetch("https://api.ipify.org?format=json");
+        const { ip } = await ipRes.json();
 
-      await supabase.from("requests_logs").insert([
-        {
-          ip,
-          route: "/",
-          timestamp: new Date().toISOString(),
-        },
-      ]);
+        let geoData;
+
+        // Primary: IP2Location API
+        try {
+          const ip2Res = await fetch(`https://api.2ip.io/${ip}?token=${process.env.NEXT_PUBLIC_2IP_TOKEN}`);
+          if (!ip2Res.ok) throw new Error("IP2Location failed");
+          geoData = await ip2Res.json();
+        } catch {
+          // Fallback: ipwho.is
+          const fallbackRes = await fetch(`https://ipwho.is/${ip}`);
+          geoData = await fallbackRes.json();
+        }
+        const userAgent = navigator.userAgent;
+
+        await supabase.from("requests_logs").insert([
+          {
+            ip,
+            route: "/",
+            timestamp: new Date().toISOString(),
+            country: geoData.country,
+            region: geoData.region,
+            city: geoData.city,
+            latitude: geoData.lat,
+            longitude: geoData.lon,
+            user_agent: userAgent,
+            asn_name: geoData.asn?.name || null,
+          },
+        ]);
+      } catch (err) {
+        console.error("Log insert failed:", err);
+      }
     };
+
+
 
     logVisit();
   }, []);
