@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MapPin, Phone, Loader2 } from "lucide-react";
+import { Send, Mail, MapPin, Loader2 } from "lucide-react";
 import emailjs from "emailjs-com";
 
 const contactInfo = [
