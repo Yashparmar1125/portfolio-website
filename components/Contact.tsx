@@ -17,12 +17,6 @@ const contactInfo = [
     title: "Location",
     value: "Mumbai, India",
   },
-  {
-    icon: Phone,
-    title: "Phone",
-    value: "+91 9175895896",
-    link: "tel:+919175895896",
-  },
 ];
 
 const Contact = () => {
