@@ -1,14 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Trophy, Award, ChevronLeft, ChevronRight, Eye } from "lucide-react";
+import { Trophy, Award, ChevronLeft, ChevronRight, Eye, LucideIcon } from "lucide-react";
 import AchievementModal from "./AchievementModal";
 
-const certificates = [
+type Certificate = {
+  id: string;
+  type: "hackathon" | "certificate";
+  title: string;
+  date: string;
+  position?: string;
+  organizer?: string;
+  issuer?: string;
+  description: string;
+  icon: LucideIcon;
+  image: string;
+  link?: string;
+};
+
+const certificates: Certificate[] = [
   {
-    id: 1,
+    id: "1",
     type: "hackathon",
     title: "Smart India Hackathon 2024",
     date: "2024",
@@ -19,7 +33,7 @@ const certificates = [
     image: "/img/hackathons/sih2024.png"
   },
   {
-    id: 2,
+    id: "2",
     type: "hackathon",
     title: "Quasar 3.0",
     date: "2024",
@@ -30,7 +44,7 @@ const certificates = [
     image: "/img/hackathons/quasar.png"
   },
   {
-    id: 3,
+    id: "3",
     type: "hackathon",
     title: "CodeAThon 2025",
     date: "2024",
@@ -41,7 +55,7 @@ const certificates = [
     image: "/img/hackathons/codeathon.png"
   },
   {
-    id: 4,
+    id: "4",
     type: "hackathon",
     title: "INSPIRON 4.0",
     date: "2024",
@@ -52,7 +66,7 @@ const certificates = [
     image: "/img/hackathons/inspiron.png"
   },
   {
-    id: 5,
+    id: "5",
     type: "certificate",
     title: "Frontend Developer (React)",
     date: "2024",
@@ -62,7 +76,7 @@ const certificates = [
     image: "/img/certificates/frontend.png"
   },
   {
-    id: 7,
+    id: "7",
     type: "certificate",
     title: "JavaScript (Intermediate)",
     date: "2024",
@@ -72,7 +86,7 @@ const certificates = [
     image: "/img/certificates/js.png"
   },
   {
-    id: 8,
+    id: "8",
     type: "certificate",
     title: "Node.js Bootcamp",
     date: "2024",
@@ -82,7 +96,7 @@ const certificates = [
     image: "/img/certificates/node.png"
   },
   {
-    id: 9,
+    id: "9",
     type: "certificate",
     title: "Python (Basic)",
     date: "2024",
@@ -92,7 +106,7 @@ const certificates = [
     image: "/img/certificates/python.png"
   },
   {
-    id: 10,
+    id: "10",
     type: "certificate",
     title: "React Bootcamp",
     date: "2024",
@@ -102,7 +116,7 @@ const certificates = [
     image: "/img/certificates/react.png"
   },
   {
-    id: 11,
+    id: "11",
     type: "certificate",
     title: "TCS Ion Career Edge",
     date: "2024",
