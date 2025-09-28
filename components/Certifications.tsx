@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Trophy, Award, ChevronLeft, ChevronRight } from "lucide-react";
+import { Trophy, Award, ChevronLeft, ChevronRight, Eye } from "lucide-react";
+import AchievementModal from "./AchievementModal";
 
 const certificates = [
   {
@@ -115,10 +116,22 @@ const certificates = [
 const Certifications = () => {
   const [activeTab, setActiveTab] = useState("hackathons");
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [selectedAchievement, setSelectedAchievement] = useState<typeof certificates[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredCertificates = certificates.filter(
     cert => cert.type === activeTab.slice(0, -1)
   );
+
+  const openAchievementModal = (achievement: typeof certificates[0]) => {
+    setSelectedAchievement(achievement);
+    setIsModalOpen(true);
+  };
+
+  const closeAchievementModal = () => {
+    setIsModalOpen(false);
+    setSelectedAchievement(null);
+  };
 
   const scroll = (direction: 'left' | 'right') => {
     const container = document.getElementById('certificates-container');
@@ -139,28 +152,28 @@ const Certifications = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <section className="py-16 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
+      <div className="container mx-auto px-6 max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-sky-600 to-teal-400 dark:from-sky-400 dark:to-teal-300 text-transparent bg-clip-text">
+          <h2 className="text-3xl font-bold mb-3 bg-gradient-to-r from-sky-600 to-teal-400 dark:from-sky-400 dark:to-teal-300 text-transparent bg-clip-text">
             Achievements
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
             A collection of my achievements, certifications, and hackathon experiences
           </p>
         </motion.div>
 
-        <div className="flex justify-center gap-4 mb-16">
+        <div className="flex justify-center gap-3 mb-10">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setActiveTab("hackathons")}
-            className={`px-8 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
               activeTab === "hackathons"
                 ? "bg-gradient-to-r from-sky-500 to-teal-400 text-white shadow-lg shadow-sky-500/30"
                 : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
@@ -172,7 +185,7 @@ const Certifications = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setActiveTab("certificates")}
-            className={`px-8 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
               activeTab === "certificates"
                 ? "bg-gradient-to-r from-sky-500 to-teal-400 text-white shadow-lg shadow-sky-500/30"
                 : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
@@ -191,7 +204,7 @@ const Certifications = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
               id="certificates-container"
-              className="flex overflow-x-auto gap-6 pb-8 -mx-4 px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              className="flex overflow-x-auto gap-4 pb-6 -mx-4 px-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             >
               {filteredCertificates.map((cert, index) => (
                 <motion.div
@@ -199,10 +212,10 @@ const Certifications = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                  className="flex-none w-[300px] bg-white dark:bg-gray-800/50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-gray-100 dark:border-gray-700"
+                  whileHover={{ y: -3 }}
+                  className="flex-none w-[280px] bg-white dark:bg-gray-800/50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 group relative border border-gray-100 dark:border-gray-700"
                 >
-                  <div className="relative h-40 w-full overflow-hidden">
+                  <div className="relative h-32 w-full overflow-hidden">
                     <Image
                       src={cert.image}
                       alt={cert.title}
@@ -210,47 +223,58 @@ const Certifications = () => {
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-3 left-3 right-3">
+                    <div className="absolute bottom-2 left-2 right-2">
                       <div className="flex items-center gap-2">
-                        <div className="p-1.5 bg-white/10 backdrop-blur-sm rounded-lg">
-                          <cert.icon size={16} className="text-white" />
+                        <div className="p-1 bg-white/10 backdrop-blur-sm rounded-lg">
+                          <cert.icon size={14} className="text-white" />
                         </div>
-                        <h3 className="text-lg font-bold text-white">
+                        <h3 className="text-base font-bold text-white">
                           {cert.title}
                         </h3>
                       </div>
                     </div>
                   </div>
-                  <div className="p-4">
-                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
+                  <div className="p-3">
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
                       {cert.date}
                     </p>
                     {cert.type === "hackathon" ? (
                       <>
-                        <div className="mb-2">
+                        <div className="mb-1">
                           <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400">
                             {cert.position}
                           </span>
                         </div>
-                        <p className="text-sm text-sky-600 dark:text-sky-400 font-medium mb-1">
+                        <p className="text-xs text-sky-600 dark:text-sky-400 font-medium mb-1">
                           {cert.organizer}
                         </p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                        <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-2">
                           {cert.description}
                         </p>
                       </>
                     ) : (
                       <>
-                        <div className="mb-2">
+                        <div className="mb-1">
                           <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400">
                             {cert.issuer}
                           </span>
                         </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                        <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-2">
                           {cert.description}
                         </p>
                       </>
                     )}
+                    
+                    {/* View Details Button */}
+                    <div className="mt-3">
+                      <button
+                        onClick={() => openAchievementModal(cert)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-sky-500 to-teal-400 text-white rounded-lg text-xs font-medium hover:from-sky-600 hover:to-teal-500 transition-all duration-300 shadow-md hover:shadow-lg w-full justify-center"
+                      >
+                        <Eye className="w-3 h-3" />
+                        View Details
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -272,6 +296,13 @@ const Certifications = () => {
           </button>
         </div>
       </div>
+
+      {/* Achievement Modal */}
+      <AchievementModal
+        achievement={selectedAchievement}
+        isOpen={isModalOpen}
+        onClose={closeAchievementModal}
+      />
     </section>
   );
 };

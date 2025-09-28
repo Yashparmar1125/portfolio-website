@@ -13,14 +13,19 @@ const CustomCursor = () => {
   const cursorX = useSpring(0, springConfig);
   const cursorY = useSpring(0, springConfig);
 
-  // Debounced hover handler for better performance
+  // Enhanced hover handler for better accessibility
   const handleMouseOver = useCallback((e: MouseEvent) => {
     if (e.target instanceof HTMLElement) {
       const isClickable = e.target.tagName.toLowerCase() === 'button' ||
         e.target.tagName.toLowerCase() === 'a' ||
         e.target.closest('button') ||
         e.target.closest('a') ||
-        e.target.closest('[role="button"]') || false;
+        e.target.closest('[role="button"]') ||
+        e.target.closest('[data-cursor="pointer"]') ||
+        e.target.style.cursor === 'pointer' ||
+        e.target.closest('input[type="submit"]') ||
+        e.target.closest('input[type="button"]') ||
+        false;
       setIsHovering(!!isClickable);
     }
   }, []);
@@ -76,14 +81,34 @@ const CustomCursor = () => {
           viewBox="0 0 32 32"
           className="w-full h-full"
         >
-          {/* Outer Ring */}
+          {/* Outer Ring with better contrast */}
           <motion.circle
             cx="16"
             cy="16"
             r="15"
             stroke="url(#cursorGradient)"
-            strokeWidth="1.5"
+            strokeWidth="2"
             fill="none"
+            strokeOpacity="0.8"
+            initial={{ pathLength: 0 }}
+            animate={{ 
+              pathLength: 1,
+              rotate: [0, 360],
+            }}
+            transition={{
+              pathLength: { duration: 2, repeat: Infinity },
+              rotate: { duration: 8, repeat: Infinity, ease: "linear" }
+            }}
+          />
+          {/* High contrast outline for accessibility */}
+          <motion.circle
+            cx="16"
+            cy="16"
+            r="15"
+            stroke="rgba(0, 0, 0, 0.3)"
+            strokeWidth="3"
+            fill="none"
+            strokeOpacity="0.5"
             initial={{ pathLength: 0 }}
             animate={{ 
               pathLength: 1,

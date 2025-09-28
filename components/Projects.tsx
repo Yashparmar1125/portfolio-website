@@ -2,9 +2,10 @@
 
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Tag, Calendar, Users, ChevronLeft, ChevronRight } from "lucide-react";
+import { Github, ExternalLink, Tag, Calendar, Users, ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import Image from "next/image";
 import Script from "next/script";
+import ProjectModal from "./ProjectModal";
 
 // Project categories
 const categories = ["All", "Web Development", "AI/ML", "Mobile", "Full Stack"];
@@ -137,6 +138,8 @@ const projects = [
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [showTechnologies, setShowTechnologies] = useState<{ [key: string]: boolean }>({});
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = (direction: "left" | "right") => {
@@ -151,6 +154,16 @@ const Projects = () => {
       ...prev,
       [projectTitle]: !prev[projectTitle]
     }));
+  };
+
+  const openProjectModal = (project: typeof projects[0]) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeProjectModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
   };
 
   const filteredProjects = projects.filter((project) => {
@@ -188,30 +201,30 @@ const Projects = () => {
       
       <section
         id="projects"
-        className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 transition-colors duration-300"
+        className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 transition-colors duration-300"
       >
-        <div className="container mx-auto px-4 max-w-7xl">
+        <div className="container mx-auto px-6 max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-16"
+            className="text-center mb-10"
           >
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-sky-600 to-teal-400 dark:from-sky-400 dark:to-teal-300 text-transparent bg-clip-text">
+            <h2 className="text-3xl font-bold mb-3 bg-gradient-to-r from-sky-600 to-teal-400 dark:from-sky-400 dark:to-teal-300 text-transparent bg-clip-text">
               Featured Projects
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
               Explore my latest projects showcasing my skills in web development, AI/ML, and full-stack solutions.
             </p>
           </motion.div>
 
           {/* Category Filter Section */}
-          <div className="mb-12 flex flex-wrap gap-3 justify-center">
+          <div className="mb-8 flex flex-wrap gap-2 justify-center">
             {categories.map((category) => (
               <motion.button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 ${
                   selectedCategory === category
                     ? "bg-gradient-to-r from-sky-500 to-teal-400 text-white shadow-lg scale-105"
                     : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
@@ -234,7 +247,7 @@ const Projects = () => {
             
             <div
               ref={containerRef}
-              className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth hide-scrollbar"
+              className="flex overflow-x-auto gap-4 pb-6 snap-x snap-mandatory scroll-smooth hide-scrollbar"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {filteredProjects.map((project, index) => (
@@ -243,7 +256,7 @@ const Projects = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex-none w-[350px] snap-center"
+                  className="flex-none w-[320px] snap-center"
                 >
                   <div className="bg-white dark:bg-gray-800/50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full border border-gray-200 dark:border-gray-700/50 group">
                     <div className="relative aspect-[16/9] overflow-hidden">
@@ -282,43 +295,54 @@ const Projects = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="p-6">
-                      <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400 mb-3">
+                    <div className="p-4">
+                      <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400 mb-2">
                         <div className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
+                          <Calendar className="w-3 h-3" />
                           <span>{project.completionDate}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <Users className="w-4 h-4" />
+                          <Users className="w-3 h-3" />
                           <span>{project.teamSize}</span>
                         </div>
                       </div>
-                      <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+                      <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
                         {project.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                      <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2">
                         {project.description}
                       </p>
                       {project.impact && (
-                        <div className="mb-4 p-3 bg-sky-50 dark:bg-sky-900/20 rounded-lg">
-                          <p className="text-sm text-sky-600 dark:text-sky-400">
+                        <div className="mb-3 p-2 bg-sky-50 dark:bg-sky-900/20 rounded-lg">
+                          <p className="text-xs text-sky-600 dark:text-sky-400">
                             <strong>Impact:</strong> {project.impact}
                           </p>
                         </div>
                       )}
-                      <div>
-                        <button
-                          onClick={() => toggleTechnologies(project.title)}
-                          className="flex items-center gap-2 text-sky-500 hover:text-sky-600 transition-colors text-sm font-medium"
-                        >
-                          <Tag className="w-4 h-4" />
-                          {showTechnologies[project.title] ? "Hide Stack" : "View Stack"}
-                        </button>
+                      <div className="space-y-2">
+                        {/* Action Buttons */}
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => openProjectModal(project)}
+                            className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-sky-500 to-teal-400 text-white rounded-lg text-xs font-medium hover:from-sky-600 hover:to-teal-500 transition-all duration-300 shadow-md hover:shadow-lg"
+                          >
+                            <Eye className="w-3 h-3" />
+                            Details
+                          </button>
+                          <button
+                            onClick={() => toggleTechnologies(project.title)}
+                            className="flex items-center gap-1.5 text-sky-500 hover:text-sky-600 transition-colors text-xs font-medium px-2 py-1.5"
+                          >
+                            <Tag className="w-3 h-3" />
+                            {showTechnologies[project.title] ? "Hide" : "Stack"}
+                          </button>
+                        </div>
+                        
                         {showTechnologies[project.title] && (
                           <motion.div
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="mt-3 flex flex-wrap gap-2"
+                            className="flex flex-wrap gap-2"
                           >
                             {project.technologies.map((tech, index) => (
                               <span
@@ -345,6 +369,13 @@ const Projects = () => {
             </button>
           </div>
         </div>
+        
+        {/* Project Modal */}
+        <ProjectModal 
+          project={selectedProject} 
+          isOpen={isModalOpen} 
+          onClose={closeProjectModal} 
+        />
       </section>
     </>
   );

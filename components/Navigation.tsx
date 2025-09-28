@@ -32,17 +32,17 @@ const Navigation = ({ onItemClick, mobile }: NavigationProps) => {
             <Link
               href={link.href}
               onClick={onItemClick}
-              className={`text-base font-medium transition-colors duration-300 ${
+              className={`relative text-base font-medium transition-all duration-300 px-3 py-2 rounded-lg ${
                 isActive
-                  ? "text-sky-600 dark:text-sky-400"
-                  : "text-slate-600 hover:text-sky-600 dark:text-slate-300 dark:hover:text-sky-400"
+                  ? "text-white bg-gradient-to-r from-sky-500 to-teal-400 shadow-lg"
+                  : "text-slate-600 hover:text-sky-600 dark:text-slate-300 dark:hover:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-900/20"
               }`}
             >
               {link.label}
               {isActive && (
-                <motion.span
+                <motion.div
                   layoutId="activeSection"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-sky-600 dark:bg-sky-400"
+                  className="absolute inset-0 bg-gradient-to-r from-sky-500 to-teal-400 rounded-lg -z-10"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}

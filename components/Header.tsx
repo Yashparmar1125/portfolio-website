@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Palette } from "lucide-react";
 import Link from "next/link";
 import Navigation from "./Navigation";
 import Logo from "./Logo"; 
@@ -11,6 +11,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const [showThemeMenu, setShowThemeMenu] = useState(false);
 
   useEffect(() => {
     if (darkMode) {
@@ -23,9 +24,20 @@ const Header = () => {
       setScrolled(window.scrollY > 20);
     };
 
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showThemeMenu && !(event.target as Element).closest('.theme-selector')) {
+        setShowThemeMenu(false);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [darkMode]);
+    document.addEventListener("click", handleClickOutside);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [darkMode, showThemeMenu]);
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${
@@ -46,26 +58,79 @@ const Header = () => {
 
         <nav className="hidden md:flex items-center gap-8">
           <Navigation />
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className={`p-2 rounded-lg transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 ${
-              scrolled
-                ? "bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700"
-                : "hover:bg-white/10 dark:hover:bg-slate-800/50"
-            }`}
-          >
-            <motion.div
-              initial={false}
-              animate={{ rotate: darkMode ? 360 : 0 }}
-              transition={{ duration: 0.5, ease: "anticipate" }}
+          
+          {/* Advanced Theme Selector */}
+          <div className="relative theme-selector">
+            <button
+              onClick={() => setShowThemeMenu(!showThemeMenu)}
+              className={`p-2 rounded-lg transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 ${
+                scrolled
+                  ? "bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700"
+                  : "hover:bg-white/10 dark:hover:bg-slate-800/50"
+              }`}
             >
-              {darkMode ? (
-                <Sun className="w-5 h-5 text-amber-500" />
-              ) : (
-                <Moon className="w-5 h-5 text-slate-700 dark:text-slate-200" />
+              <motion.div
+                initial={false}
+                animate={{ rotate: showThemeMenu ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Palette className="w-5 h-5 text-sky-500" />
+              </motion.div>
+            </button>
+
+            {/* Theme Menu Dropdown */}
+            <AnimatePresence>
+              {showThemeMenu && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
+                >
+                  <div className="p-2">
+                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2 px-2">
+                      Choose Theme
+                    </div>
+                    
+                    {/* Current Dark Theme */}
+                    <button
+                      onClick={() => {
+                        setDarkMode(true);
+                        setShowThemeMenu(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
+                        darkMode 
+                          ? "bg-sky-100 dark:bg-sky-900/30 text-sky-700 dark:text-sky-300" 
+                          : "hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
+                      }`}
+                    >
+                      <div className="w-4 h-4 rounded-full bg-gradient-to-br from-sky-500 to-teal-400"></div>
+                      <span>Ocean Dark</span>
+                      {darkMode && <div className="ml-auto w-2 h-2 bg-sky-500 rounded-full"></div>}
+                    </button>
+
+                    {/* Light Theme */}
+                    <button
+                      onClick={() => {
+                        setDarkMode(false);
+                        setShowThemeMenu(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
+                        !darkMode 
+                          ? "bg-sky-100 dark:bg-sky-900/30 text-sky-700 dark:text-sky-300" 
+                          : "hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
+                      }`}
+                    >
+                      <div className="w-4 h-4 rounded-full bg-gradient-to-br from-blue-400 to-cyan-300"></div>
+                      <span>Ocean Light</span>
+                      {!darkMode && <div className="ml-auto w-2 h-2 bg-sky-500 rounded-full"></div>}
+                    </button>
+                  </div>
+                </motion.div>
               )}
-            </motion.div>
-          </button>
+            </AnimatePresence>
+          </div>
         </nav>
 
         <div className="md:hidden flex items-center gap-2">
