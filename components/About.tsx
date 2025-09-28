@@ -52,51 +52,55 @@ const About = () => {
   return (
     <section
       id="about"
-      className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 transition-colors duration-300"
+      className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 transition-colors duration-300"
     >
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="container mx-auto px-6 max-w-6xl">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl font-bold mb-16 text-center bg-gradient-to-r from-sky-600 to-teal-400 dark:from-sky-400 dark:to-teal-300 text-transparent bg-clip-text"
+          className="text-3xl font-bold mb-10 text-center bg-gradient-to-r from-sky-600 to-teal-400 dark:from-sky-400 dark:to-teal-300 text-transparent bg-clip-text"
         >
           About Me
         </motion.h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Image container */}
+        {/* Asymmetrical Layout: 60/40 split with image breaking out */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+          {/* Image container - spans 2 columns and breaks out */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative"
+            className="relative lg:col-span-2 lg:-ml-8"
           >
             <style>{fluidImageKeyframes}</style>
-            <div className="relative w-72 h-72 md:w-96 md:h-96 mx-auto">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto lg:mx-0">
               <div className="absolute inset-0 bg-gradient-to-br from-sky-500 to-teal-400 opacity-20 rounded-[60%_40%_30%_70%/60%_30%_70%_40%]" />
               <Image
                 src="/img/yash.jpg"
                 alt="Yash Parmar"
-                width={400}
-                height={400}
-                className="relative z-10 shadow-xl"
+                width={320}
+                height={320}
+                className="relative z-10 shadow-2xl"
                 style={fluidImageStyle}
               />
-              {/* Decorative elements */}
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-sky-500/10 rounded-full blur-xl" />
-              <div className="absolute -top-6 -left-6 w-32 h-32 bg-teal-500/10 rounded-full blur-xl" />
+              {/* Enhanced decorative elements */}
+              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-sky-500/15 rounded-full blur-xl" />
+              <div className="absolute -top-6 -left-6 w-32 h-32 bg-teal-500/15 rounded-full blur-xl" />
+              {/* Floating accent elements */}
+              <div className="absolute top-3 right-3 w-4 h-4 bg-sky-400 rounded-full animate-pulse" />
+              <div className="absolute bottom-6 left-3 w-3 h-3 bg-teal-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
             </div>
           </motion.div>
 
-          {/* Text content */}
+          {/* Text content - spans 3 columns for 60/40 split */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="space-y-6"
+            className="space-y-6 lg:col-span-3"
           >
-            <p className="text-lg leading-relaxed">
+            <p className="text-base leading-relaxed">
               I am a passionate Software Developer with a deep interest in
               Artificial Intelligence (AI) and Machine Learning (ML). I have a
               strong foundation in building scalable web and mobile
@@ -105,22 +109,22 @@ const About = () => {
             </p>
 
             {/* Highlights Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
               {highlights.map((item, index) => (
                 <motion.div
                   key={item.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                  className="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow group"
+                  className="bg-white dark:bg-gray-800/50 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow group"
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className="p-3 bg-gradient-to-br from-sky-500 to-teal-400 rounded-lg text-white group-hover:scale-110 transition-transform">
-                      <item.icon size={24} />
+                  <div className="flex items-center space-x-3">
+                    <div className="p-2 bg-gradient-to-br from-sky-500 to-teal-400 rounded-lg text-white group-hover:scale-110 transition-transform">
+                      <item.icon size={20} />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <h3 className="font-semibold text-base mb-1">{item.title}</h3>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
                         {item.description}
                       </p>
                     </div>
@@ -134,12 +138,12 @@ const About = () => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="mt-8 flex justify-start"
+              className="mt-6 flex justify-start"
             >
               <motion.a
                 href="/resume/Resume_YashParmar.pdf"
                 download="Yash_Parmar_Resume.pdf"
-                className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-sky-600 to-teal-400 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-sky-500/25 transition-all duration-300"
+                className="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-sky-600 to-teal-400 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-sky-500/25 transition-all duration-300 text-sm"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

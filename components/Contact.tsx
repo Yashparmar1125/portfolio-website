@@ -88,78 +88,79 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 transition-colors duration-300"
+      className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 transition-colors duration-300"
     >
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="container mx-auto px-6 max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-sky-600 to-teal-400 dark:from-sky-400 dark:to-teal-300 text-transparent bg-clip-text">
+          <h2 className="text-3xl font-bold mb-3 bg-gradient-to-r from-sky-600 to-teal-400 dark:from-sky-400 dark:to-teal-300 text-transparent bg-clip-text">
             Get in Touch
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
             Have a question or want to work together? Feel free to reach out!
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="space-y-8"
+            className="space-y-6"
           >
-            <div className="space-y-6">
+            {/* Compact Contact Info Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={info.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex items-start gap-4 p-4 bg-white dark:bg-gray-800/50 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="flex items-center gap-3 p-3 bg-white dark:bg-gray-800/50 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="p-3 bg-gradient-to-br from-sky-500 to-teal-400 rounded-lg text-white">
-                    <info.icon size={24} />
+                  <div className="p-2 bg-gradient-to-br from-sky-500 to-teal-400 rounded-lg text-white">
+                    <info.icon size={18} />
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-medium text-gray-900 dark:text-white text-sm">
                       {info.title}
                     </h3>
                     {info.link ? (
                       <a
                         href={info.link}
-                        className="text-gray-600 dark:text-gray-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors"
+                        className="text-gray-600 dark:text-gray-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors text-sm truncate block"
                       >
                         {info.value}
                       </a>
                     ) : (
-                      <p className="text-gray-600 dark:text-gray-400">{info.value}</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm truncate">{info.value}</p>
                     )}
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Social Media Links */}
-            <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 shadow-lg">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Follow me on social media
+            {/* Compact Social Media Links */}
+            <div className="bg-white dark:bg-gray-800/50 rounded-lg p-4 shadow-md">
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-3 text-sm">
+                Follow me
               </h3>
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 <motion.a
                   href="https://github.com/Yashparmar1125"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:text-sky-500 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="w-5 h-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -176,11 +177,11 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:text-sky-500 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="w-5 h-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -197,11 +198,11 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:text-sky-500 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="w-5 h-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -214,11 +215,11 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:text-sky-500 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="w-5 h-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -240,13 +241,13 @@ const Contact = () => {
           >
             <form
               onSubmit={handleSubmit}
-              className="bg-white dark:bg-gray-800/50 p-8 rounded-xl shadow-lg space-y-6"
+              className="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-lg space-y-4"
             >
               {error && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg text-sm"
+                  className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg text-sm"
                 >
                   {error}
                 </motion.div>
@@ -256,19 +257,13 @@ const Contact = () => {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-lg text-sm"
+                  className="p-3 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-lg text-sm"
                 >
                   Message sent successfully! I&apos;ll get back to you soon.
                 </motion.div>
               )}
 
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Name
-                </label>
+              <div className="relative">
                 <input
                   type="text"
                   id="name"
@@ -276,18 +271,22 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 focus:border-transparent transition-colors"
-                  placeholder="Your name"
+                  className="w-full px-3 py-2.5 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 focus:border-transparent transition-all duration-200 peer"
+                  placeholder=" "
                 />
+                <label
+                  htmlFor="name"
+                  className={`absolute left-4 transition-all duration-200 pointer-events-none ${
+                    formData.name
+                      ? "top-1 text-xs text-sky-500 dark:text-sky-400 bg-white dark:bg-gray-700 px-1"
+                      : "top-3 text-sm text-gray-500 dark:text-gray-400"
+                  }`}
+                >
+                  Your name
+                </label>
               </div>
 
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Email
-                </label>
+              <div className="relative">
                 <input
                   type="email"
                   id="email"
@@ -295,34 +294,48 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 focus:border-transparent transition-colors"
-                  placeholder="your.email@example.com"
+                  className="w-full px-3 py-2.5 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 focus:border-transparent transition-all duration-200 peer"
+                  placeholder=" "
                 />
+                <label
+                  htmlFor="email"
+                  className={`absolute left-4 transition-all duration-200 pointer-events-none ${
+                    formData.email
+                      ? "top-1 text-xs text-sky-500 dark:text-sky-400 bg-white dark:bg-gray-700 px-1"
+                      : "top-3 text-sm text-gray-500 dark:text-gray-400"
+                  }`}
+                >
+                  Email address
+                </label>
               </div>
 
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Message
-                </label>
+              <div className="relative">
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows={4}
-                  className="w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 focus:border-transparent transition-colors resize-none"
-                  placeholder="Your message..."
+                  rows={3}
+                  className="w-full px-3 py-2.5 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400 focus:border-transparent transition-all duration-200 resize-none peer"
+                  placeholder=" "
                 ></textarea>
+                <label
+                  htmlFor="message"
+                  className={`absolute left-4 transition-all duration-200 pointer-events-none ${
+                    formData.message
+                      ? "top-1 text-xs text-sky-500 dark:text-sky-400 bg-white dark:bg-gray-700 px-1"
+                      : "top-3 text-sm text-gray-500 dark:text-gray-400"
+                  }`}
+                >
+                  Your message
+                </label>
               </div>
 
               <motion.button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold py-3 px-6 rounded-lg flex items-center justify-center space-x-2 hover:from-sky-600 hover:to-teal-500 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold py-2.5 px-4 rounded-lg flex items-center justify-center space-x-2 hover:from-sky-600 hover:to-teal-500 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >

@@ -10,6 +10,7 @@ import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Certifications from "@/components/Certifications";
 import AlienOverlay from "@/components/AlienOverlay";
+import ScrollAnimation from "@/components/ScrollAnimation";
 import { supabase } from "../lib/supabaseClient";
 
 export default function Home() {
@@ -70,21 +71,31 @@ export default function Home() {
             <section id="home">
               <Hero />
             </section>
-            <section id="about">
-              <About />
-            </section>
-            <section id="skills">
-              <Skills />
-            </section>
-            <section id="certifications">
-              <Certifications />
-            </section>
-            <section id="projects">
-              <Projects />
-            </section>
-            <section id="contact">
-              <Contact />
-            </section>
+            <ScrollAnimation direction="up" delay={0.1}>
+              <section id="about">
+                <About />
+              </section>
+            </ScrollAnimation>
+            <ScrollAnimation direction="up" delay={0.2}>
+              <section id="skills">
+                <Skills />
+              </section>
+            </ScrollAnimation>
+            <ScrollAnimation direction="up" delay={0.3}>
+              <section id="certifications">
+                <Certifications />
+              </section>
+            </ScrollAnimation>
+            <ScrollAnimation direction="up" delay={0.4}>
+              <section id="projects">
+                <Projects />
+              </section>
+            </ScrollAnimation>
+            <ScrollAnimation direction="up" delay={0.5}>
+              <section id="contact">
+                <Contact />
+              </section>
+            </ScrollAnimation>
           </Layout>
         </motion.div>
       </AnimatePresence>

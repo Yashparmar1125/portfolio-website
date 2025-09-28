@@ -281,10 +281,10 @@ const Hero = () => {
                   contactSection.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition-all duration-300 ease-in-out cursor-pointer"
+              className="bg-gradient-to-r from-sky-500 to-teal-400 hover:from-sky-600 hover:to-teal-500 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition-all duration-300 ease-in-out cursor-pointer shadow-lg hover:shadow-xl"
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 0 15px rgba(2, 132, 199, 0.5)",
+                boxShadow: "0 0 20px rgba(2, 132, 199, 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
               variants={itemVariants}
