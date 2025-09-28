@@ -1,7 +1,8 @@
 "use client";
 
+import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, MapPin, Calendar, Award, Building, ExternalLink } from "lucide-react";
+import { X, MapPin, Calendar, Award, Building, ExternalLink, LucideIcon } from "lucide-react";
 import Image from "next/image";
 
 interface AchievementModalProps {
@@ -16,7 +17,7 @@ interface AchievementModalProps {
     organizer?: string;
     issuer?: string;
     location?: string;
-    icon: any;
+    icon: LucideIcon;
     link?: string;
   } | null;
   isOpen: boolean;
