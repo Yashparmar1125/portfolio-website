@@ -20,7 +20,7 @@ const projects = [
     technologies: ["React", "Node.js", "Django", "MongoDB", "TensorFlow", "Firebase"],
     image: "/img/LangSQL.png",
     github: "https://github.com/Yashparmar1125/LangSQL-Inspiron-4.0",
-    live: "https://example.com",
+    live: "https://langsql.vercel.app/",
     category: "Full Stack",
     completionDate: "March 2025",
     teamSize: "4",
