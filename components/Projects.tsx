@@ -81,6 +81,20 @@ const projects = [
     impact: "Streamlined administrative tasks",
   },
   {
+  title: "Smart Inventory Management System",
+  description:
+    "A modern full-stack inventory management system with dashboards, CRUD modules, analytics, and a responsive dark-mode UI. Built using Flask and PostgreSQL with Bootstrap 5 for an interactive experience and Chart.js for real-time insights.",
+  technologies: ["Flask", "PostgreSQL", "Bootstrap 5", "Chart.js", "Python"],
+  image: "/img/Screenshot 2025-10-31 002745.png",
+  github: "https://github.com/Yashparmar1125/Inventory-Management-System",
+  live: "https://sims-crhmb0cndsddfhb8.canadacentral-01.azurewebsites.net/", // change to actual live URL if deployed
+  category: "Full Stack",
+  color: "from-purple-500/20 to-pink-500/20 dark:from-purple-500/10 dark:to-pink-500/10",
+  completionDate: "October 2025",
+  teamSize: "Solo",
+  impact: "Automated inventory tracking and reporting, reducing manual workload by 70%.",
+},
+  {
     title: "Facial Attendence System",
     description:
       "This project is an Attendance System using Face Recognition. Built with Flask for the web framework, OpenCV for face detection, and MySQL for storing data, it automates the process of marking attendance by recognizing faces in real-time.",
