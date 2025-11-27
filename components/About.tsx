@@ -141,7 +141,7 @@ const About = () => {
               className="mt-6 flex justify-start"
             >
               <motion.a
-                href="/resume/Yash_Parmar_Resume.pdf"
+                href="/resume/YashParmar_Resume.pdf"
                 download="Yash_Parmar_Resume.pdf"
                 className="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-sky-600 to-teal-400 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-sky-500/25 transition-all duration-300 text-sm"
                 whileHover={{ scale: 1.05 }}
