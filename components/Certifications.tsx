@@ -124,7 +124,17 @@ const certificates: Certificate[] = [
     description: "Professional development program focusing on industry-relevant skills and career preparation",
     icon: Award,
     image: "/img/certificates/tcs ion.png"
-  }
+  },
+  {
+    id: "12",
+    type: "certificate",
+    title: "AWS Cloud Practitioner",
+    date: "2025",
+    issuer: "AWS",
+    description: "AWS Cloud fundamentals, including core services, security best practices, and cost-optimized cloud architectures aligned with AWS Cloud Practitioner standards.",
+    icon: Award,
+    image: "/img/certificates/aws.png"
+  },
 ];
 
 const Certifications = () => {
