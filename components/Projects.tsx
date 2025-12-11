@@ -11,6 +11,30 @@ import ProjectModal from "./ProjectModal";
 const categories = ["All", "Web Development", "AI/ML", "Mobile", "Full Stack"];
 
 const projects = [
+  {
+  title: "Zuno – Video Conferencing Platform",
+  description:
+    "A full-stack, real-time video conferencing ecosystem engineered with WebRTC, Socket.IO, Firebase Auth, and a React–Node microstack. Delivers HD video calls, multi-participant orchestration, screen sharing, chat, analytics, and a modern meeting workflow with enterprise-grade signaling and a resilient P2P architecture.",
+  technologies: [
+    "React",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Firebase Auth",
+    "Socket.IO",
+    "Tailwind CSS",
+    "WebRTC"
+  ],
+  image: "/img/zuno.png", // update if using a different asset
+  github: "https://github.com/Yashparmar1125/Zuno-QuickJoin", // drop actual repo URL
+  live: "https://zunoquickjoin.vercel.app", // drop actual deployed URL
+  category: "Full Stack",
+  completionDate: "January 2025",
+  teamSize: "Solo",
+  impact:
+    "Delivered seamless multi-user HD conferencing with robust WebRTC signaling, reducing join latency and enabling scalable real-time collaboration."
+}
+,
   
   
   {
