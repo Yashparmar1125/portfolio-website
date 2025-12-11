@@ -77,6 +77,21 @@ const projects = [
     impact: "Empowers users to make informed investment decisions by leveraging AI-driven stock price predictions and technical analysis.",
   },
   {
+  title: "ThumbLab Studio – Creative Agency Website",
+  description:
+    "A modern, conversion-driven web platform engineered for a digital-first creative agency specializing in video editing, thumbnail design, scriptwriting, and social marketing. The solution emphasizes brand storytelling, high-performance UI/UX, and scalable architecture to elevate the agency’s digital presence and client acquisition funnel.",
+  technologies: ["Next.js", "React", "Tailwind CSS", "Node.js", "Firebase"],
+  image: "/img/thumblab.png",
+  github: "https://github.com/Yashparmar1125/ThumbLab", // update if different
+  live: "https://thumblab.studio/", // update if different
+  category: "Web Development",
+  completionDate: "October 2025",
+  teamSize: "1",
+  impact:
+    "Strengthened the agency’s digital brand identity and improved lead-conversion readiness through a high-quality, responsive, and SEO-optimized web experience",
+},
+
+  {
   "title": "Impact Link",
   "description": "A platform connecting volunteers with NGOs based on skills and availability, with features like task discovery and campaign tracking.",
   "image": "/img/image.png",
