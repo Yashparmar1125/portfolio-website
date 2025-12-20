@@ -1,14 +1,15 @@
-// Footer.tsx
 "use client";
 
 import React from "react";
 import Link from "next/link";
 
 const quickLinks = [
-  { name: "About", href: "/#about" },
-  { name: "Projects", href: "/#projects" },
-  { name: "Skills", href: "/#skills" },
-  { name: "Contact", href: "/#contact" },
+  { name: "About Yash Parmar", href: "/#about" }, // SEO: Descriptive anchor text
+  { name: "Technical Skills", href: "/#skills" }, // SEO: Keyword-rich anchor text
+  { name: "Featured Projects", href: "/#projects" }, // SEO: Keyword-rich anchor text
+  { name: "Contact Yash", href: "/#contact" }, // SEO: Name-rich anchor text
+  { name: "Services Provided", href: "/#services" }, // SEO: Added more internal links per audit
+  { name: "Certifications", href: "/#certifications" }, // SEO: Added more internal links per audit
 ];
 
 const Footer: React.FC = () => {
@@ -23,19 +24,20 @@ const Footer: React.FC = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-gray-800 dark:text-white">Yash Parmar</h3>
             <p className="text-sm max-w-md">
-              Software Developer specializing in building exceptional digital experiences. Let&apos;s work together to bring your ideas to life.
+              Professional Software Developer and AI Engineer specializing in building exceptional digital experiences. 
+              Let&apos;s work together to bring your ideas to life.
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Explore My Portfolio</h3>
             <ul className="grid grid-cols-2 gap-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link 
                     href={link.href} 
-                    className="hover:text-sky-500 transition-colors inline-block py-1"
+                    className="hover:text-sky-500 transition-colors inline-block py-1 text-sm"
                   >
                     {link.name}
                   </Link>
@@ -69,6 +71,5 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-
 
 //Version 10.4.0
