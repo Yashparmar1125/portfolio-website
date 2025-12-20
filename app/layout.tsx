@@ -7,22 +7,24 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Yash Parmar | Full Stack Developer & AI Engineer Portfolio",
-  description: "Portfolio of Yash Parmar, a Full Stack Developer and AI Engineer specializing in React, Next.js, Python, and Machine Learning. View projects, skills, and contact information.",
+  title: "Yash Parmar | Full Stack Developer & AI Engineer",
+  // Shortened to ~150 characters to avoid truncation and include keywords
+  description: "Official portfolio of Yash Parmar, a Full Stack Developer and AI Engineer specializing in React, Next.js, and ML. Explore projects and skills by Yash Parmar.",
   keywords: "Yash Parmar, portfolio, developer, software engineer, full stack developer, AI engineer, machine learning, React, Next.js, Python, web development, projects, resume, contact",
   authors: [{ name: "Yash Parmar" }],
   creator: "Yash Parmar",
   publisher: "Yash Parmar",
-  metadataBase: new URL("https://yashparmar.in"), // Added metadataBase for relative image paths
+  metadataBase: new URL("https://yashparmar.in"), 
   alternates: {
-    canonical: "https://helloyashparmar.dev", // Ensures search engines prioritize the .in domain
+    // FIX: Canonical must match your primary domain yashparmar.in
+    canonical: "https://yashparmar.in", 
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yashparmar.in/", // Updated to new domain
+    url: "https://yashparmar.in/", 
     title: "Yash Parmar | Full Stack Developer & AI Engineer Portfolio",
-    description: "Portfolio of Yash Parmar, a Full Stack Developer and AI Engineer specializing in React, Next.js, Python, and Machine Learning. View projects, skills, and contact information.",
+    description: "Portfolio of Yash Parmar, a Full Stack Developer and AI Engineer specializing in React, Next.js, and Machine Learning.",
     siteName: "Yash Parmar Portfolio",
     images: [
       {
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Yash Parmar | Full Stack Developer & AI Engineer Portfolio",
-    description: "Portfolio of Yash Parmar, a Full Stack Developer and AI Engineer specializing in React, Next.js, Python, and Machine Learning.",
+    description: "Portfolio of Yash Parmar, a Full Stack Developer and AI Engineer specializing in React, Next.js, and Machine Learning.",
     creator: "@yashparmar",
     images: ["/img/og-image.png"],
   },
@@ -65,8 +67,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="UTF-8" />
-        {/* The robots meta tag here is redundant as it's already in the metadata object above */}
         <meta name="theme-color" content="#000000" />
+        {/* Removed redundant manual robots tag as it's handled by Next.js metadata above */}
       </head>
       <body className={inter.className}>
         <ThemeProvider
