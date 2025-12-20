@@ -13,10 +13,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Yash Parmar" }],
   creator: "Yash Parmar",
   publisher: "Yash Parmar",
+  metadataBase: new URL("https://yashparmar.in"), // Added metadataBase for relative image paths
+  alternates: {
+    canonical: "https://helloyashparmar.dev", // Ensures search engines prioritize the .in domain
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yashparmar.vercel.app/",
+    url: "https://yashparmar.in/", // Updated to new domain
     title: "Yash Parmar | Full Stack Developer & AI Engineer Portfolio",
     description: "Portfolio of Yash Parmar, a Full Stack Developer and AI Engineer specializing in React, Next.js, Python, and Machine Learning. View projects, skills, and contact information.",
     siteName: "Yash Parmar Portfolio",
@@ -61,7 +65,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="UTF-8" />
-        <meta name="robots" content="index, follow" />
+        {/* The robots meta tag here is redundant as it's already in the metadata object above */}
         <meta name="theme-color" content="#000000" />
       </head>
       <body className={inter.className}>
@@ -78,6 +82,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-
-//Version 10.4.0
