@@ -197,13 +197,13 @@ const Hero = () => {
           "@context": "https://schema.org",
           "@type": "Person",
           "name": "Yash Parmar",
-          "url": "https://yashparmar.vercel.app",
-          "image": "https://yashparmar.vercel.app/img/profile.jpg",
+          "url": "https://yashparmar.in",
+          "image": "https://yashparmar.in/img/yash2.jpg",
           "jobTitle": "Full Stack Developer & AI Engineer",
           "description": "A passionate Full Stack Developer and AI Engineer specializing in React, Next.js, Python, and Machine Learning.",
           "sameAs": [
             "https://github.com/Yashparmar1125",
-            "https://www.linkedin.com/in/yash-parmar-1125/",
+            "https://www.linkedin.com/in/yashparmar1125/",
             "https://twitter.com/yashparmar"
           ],
           "knowsAbout": [
