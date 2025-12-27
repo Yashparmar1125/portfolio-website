@@ -10,7 +10,7 @@ const contactInfo = [
     icon: Mail,
     title: "Email",
     value: "yashparmar11y@gmail.com",
-    link: "mailto:yashparmar1125@gmail.com",
+    link: "mailto:yashparmar11y@gmail.com",
   },
   {
     icon: MapPin,

@@ -2,16 +2,23 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { motion, useAnimation, Variants } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Twitter, Mail } from "lucide-react";
 import { Cursor } from "react-simple-typewriter";
 import Image from "next/image";
 import Script from "next/script";
 
 const Hero = () => {
-  const [text, setText] = useState(""); // Use local state for immediate typing
-  const [isTyping, setIsTyping] = useState(false); // To track typing state
+  const [text, setText] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
   const [particles, setParticles] = useState<Array<{ x: number, y: number }>>([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  // Social Links Data
+  const socialLinks = [
+    { icon: Github, href: "https://github.com/Yashparmar1125", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/yashparmar1125/", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:yashparmar11y@gmail.com", label: "Email" },
+  ];
 
   const quotes = useMemo(
     () => [
@@ -34,10 +41,9 @@ const Hero = () => {
   const controls = useAnimation();
 
   useEffect(() => {
-    // Trigger typewriting manually
     const timeout = setTimeout(() => {
       setIsTyping(true);
-    }, 100); // Wait 100ms to ensure page loads before starting typing
+    }, 100);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -46,7 +52,7 @@ const Hero = () => {
     if (isTyping) {
       const typewriterEffect = setTimeout(() => {
         setText("Yash Parmar");
-      }, 100); // Immediate text setting
+      }, 100);
 
       return () => clearTimeout(typewriterEffect);
     }
@@ -56,7 +62,6 @@ const Hero = () => {
     controls.start("visible");
   }, [controls]);
 
-  // Initialize particles after component mounts
   useEffect(() => {
     const updateDimensions = () => {
       setDimensions({
@@ -65,16 +70,13 @@ const Hero = () => {
       });
     };
 
-    // Initial update
     updateDimensions();
 
-    // Initialize particles
     setParticles(Array(5).fill(null).map(() => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight
     })));
 
-    // Update dimensions on resize
     window.addEventListener('resize', updateDimensions);
     return () => window.removeEventListener('resize', updateDimensions);
   }, []);
@@ -143,7 +145,6 @@ const Hero = () => {
     }
   };
 
-  // Typing and untyping the quotes
   useEffect(() => {
     if (quoteIndex < quotes.length) {
       const currentQuote = quotes[quoteIndex];
@@ -151,7 +152,6 @@ const Hero = () => {
       let i = 0;
       let timeout: NodeJS.Timeout;
 
-      // Typing effect
       const typeQuote = () => {
         if (i < currentQuote.length) {
           currentText += currentQuote.charAt(i);
@@ -165,7 +165,6 @@ const Hero = () => {
         }
       };
 
-      // Untyping effect
       const deleteQuote = () => {
         if (i > 0) {
           currentText = currentText.slice(0, -1);
@@ -274,23 +273,55 @@ const Hero = () => {
               Software Developer | AI & ML Enthusiast | App Developer
             </motion.p>
 
-            <motion.button
-              onClick={() => {
-                const contactSection = document.getElementById("contact");
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="bg-gradient-to-r from-sky-500 to-teal-400 hover:from-sky-600 hover:to-teal-500 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition-all duration-300 ease-in-out cursor-pointer shadow-lg hover:shadow-xl"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 0 20px rgba(2, 132, 199, 0.5)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              variants={itemVariants}
-            >
-              Get in touch <ArrowRight className="ml-2" />
-            </motion.button>
+            <motion.div className="flex flex-col md:items-start items-center gap-6" variants={itemVariants}>
+              <motion.button
+                onClick={() => {
+                  const contactSection = document.getElementById("contact");
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="bg-gradient-to-r from-sky-500 to-teal-400 hover:from-sky-600 hover:to-teal-500 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition-all duration-300 ease-in-out cursor-pointer shadow-lg hover:shadow-xl"
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 0 20px rgba(2, 132, 199, 0.5)",
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get in touch <ArrowRight className="ml-2" />
+              </motion.button>
+
+              {/* Social Buttons - Fixed Animation */}
+              <motion.div 
+                className="flex items-center gap-4 mt-1" 
+                variants={itemVariants}
+              >
+                {socialLinks.map((social, index) => (
+                  <motion.a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    // 'group' allows children (background and icon) to react to the hover state of this container
+                    className="group relative p-3.5 rounded-full bg-white dark:bg-slate-950 border border-sky-100 dark:border-sky-500/20 shadow-sm dark:shadow-none overflow-hidden transition-all duration-300"
+                    // Motion props for physics only
+                    whileHover={{ scale: 1.15, y: -3 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {/* Gradient Background Layer - Absolute & Fades in */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-sky-500 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out" />
+                    
+                    {/* Icon - Relative to sit on top of gradient */}
+                    <social.icon 
+                      size={20} 
+                      strokeWidth={2} 
+                      className="relative z-10 text-sky-600 dark:text-sky-300 group-hover:text-white transition-colors duration-300" 
+                    />
+                  </motion.a>
+                ))}
+              </motion.div>
+            </motion.div>
           </motion.div>
 
           {/* Image Container with enhanced animations */}
@@ -402,6 +433,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
-
-//Version 10.4.0
