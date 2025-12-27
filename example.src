@@ -1,5 +1,0 @@
-if (xy == 10) {
-    xy = xy + y;
-} else {
-    return xy;
-}

@@ -5,7 +5,7 @@ import { motion, useAnimation, Variants } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { Cursor } from "react-simple-typewriter";
 import Image from "next/image";
-import Script from "next/script";
+
 
 const Hero = () => {
   const [text, setText] = useState("");
@@ -191,32 +191,6 @@ const Hero = () => {
 
   return (
     <>
-      <Script id="person-schema" type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "Yash Parmar",
-          "url": "https://yashparmar.in",
-          "image": "https://yashparmar.in/img/yash2.jpg",
-          "jobTitle": "Full Stack Developer & AI Engineer",
-          "description": "A passionate Full Stack Developer and AI Engineer specializing in React, Next.js, Python, and Machine Learning.",
-          "sameAs": [
-            "https://github.com/Yashparmar1125",
-            "https://www.linkedin.com/in/yashparmar1125/",
-            "https://twitter.com/yashparmar"
-          ],
-          "knowsAbout": [
-            "Web Development",
-            "React",
-            "Next.js",
-            "Python",
-            "Machine Learning",
-            "Full Stack Development",
-            "AI Engineering"
-          ]
-        })}
-      </Script>
-      
       <section
         id="home"
         className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 md:px-12 lg:px-24"
