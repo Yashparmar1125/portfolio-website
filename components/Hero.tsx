@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { motion, useAnimation, Variants } from "framer-motion";
-import { ArrowRight, Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { Cursor } from "react-simple-typewriter";
 import Image from "next/image";
 import Script from "next/script";
