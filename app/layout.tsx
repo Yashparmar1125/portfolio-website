@@ -15,6 +15,11 @@ export const metadata: Metadata = {
   creator: "Yash Parmar",
   publisher: "Yash Parmar",
   metadataBase: new URL("https://yashparmar.in"), 
+  icons: {
+    icon: "/favicon.ico", // Path to your image in the 'public' folder
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico", // For iOS devices
+  },
   alternates: {
     // FIX: Canonical must match your primary domain yashparmar.in
     canonical: "https://yashparmar.in", 
