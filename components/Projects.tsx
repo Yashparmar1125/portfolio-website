@@ -12,6 +12,32 @@ const categories = ["All", "Web Development", "AI/ML", "Mobile", "Full Stack"];
 
 const projects = [
   {
+  title: "GigFlow – Real-Time Gig Marketplace",
+  description:
+    "A modern full-stack gig marketplace enabling clients to post gigs, freelancers to bid, and owners to hire — backed by secure HTTP-only authentication, real-time Socket.IO notifications, and a polished React–Tailwind UI. Designed with production-grade security, scalable APIs, and a clean developer-friendly architecture.",
+  technologies: [
+    "React",
+    "TypeScript",
+    "Vite",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Mongoose",
+    "Socket.IO",
+    "Tailwind CSS",
+    "JWT (HTTP-only cookies)"
+  ],
+  image: "/img/Screenshot 2026-01-13 174428.png", // update if using a different asset
+  github: "https://github.com/Yashparmar1125/GigFlow",
+  live: "https://gigflow.yashparmar.in",
+  category: "Full Stack",
+  completionDate: "January 2025",
+  teamSize: "Solo",
+  impact:
+    "Implemented a secure, real-time gig lifecycle with live bidding and hiring notifications, improving responsiveness and enabling scalable client–freelancer interactions."
+}
+,
+  {
   title: "Zuno – Video Conferencing Platform",
   description:
     "A full-stack, real-time video conferencing ecosystem engineered with WebRTC, Socket.IO, Firebase Auth, and a React–Node microstack. Delivers HD video calls, multi-participant orchestration, screen sharing, chat, analytics, and a modern meeting workflow with enterprise-grade signaling and a resilient P2P architecture.",
